@@ -1,0 +1,61 @@
+<?xml version="1.0" ?>
+<project name="Build Custom ANT tasks" basedir="../" default="default">
+
+  <property name="view.root.path" location="../../../" />
+
+  <property file="Scripts/common.build.properties" />
+  <property file="${project.build.dir}/buildinfo.properties" />
+  <property file="${view.root.path}/ITKodex/Projects/Commons/Implementation/DomainTier/Build/buildinfo.properties" prefix="itcodexcommons"/>
+  <property file="${view.root.path}/ITKodex/Projects/LiTest/Implementation/DomainTier/Build/buildinfo.properties" prefix="litest"/>
+
+  <property name="test.file" value="ANTUnit/ANTUnitTests.xml"/>
+
+  <path id="project.library.classpath">
+	<fileset dir="${project.library.dir}">
+	  <include name="**/*.jar" />
+	</fileset>
+  	
+	<fileset dir="${distribution.base.path}/${itcodexcommons.component.distribution.dir}">
+		<include name="${itcodexcommons.component.packaged.file}" />
+	</fileset>
+	
+	<fileset dir="${distribution.base.path}/${litest.component.distribution.dir}">
+		<include name="${litest.component.packaged.file}" />
+	</fileset>
+  </path>
+	
+  <target name="init">
+  	<delete dir="${project.binary.dir}"/>
+    <delete dir="${project.distribution.dir}"/>
+
+  	<mkdir dir="${project.binary.dir}"/>
+    <mkdir dir="${project.distribution.dir}"/>
+  </target>
+
+  <target name="compile" depends="init">
+    <javac srcdir="${project.source.dir}" destdir="${project.binary.dir}">
+      <classpath refid="project.library.classpath" />
+    </javac>
+    
+  	<copy todir="${project.binary.dir}">
+      <fileset dir="${project.source.dir}" includes="**/*.xml,**/*.properties"/>
+    </copy>
+  </target>
+
+  <target name="antunit" xmlns:au="antlib:org.apache.ant.antunit" depends="compile">
+    <au:antunit>
+      <fileset file="${test.file}" />
+      <au:plainlistener/>
+    </au:antunit>
+  </target>
+
+  <target name="jar" depends="antunit">
+    <jar destfile="${project.distribution.dir}/${component.packaged.file}">
+      <fileset dir="${project.binary.dir}" includes="**/*" />
+    </jar>
+  </target>
+  
+  <target name="all" depends="jar"/>
+  <target name="default" depends="all"/>
+
+</project>

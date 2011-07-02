@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="Test Custom ANT tasks" basedir="../" default="testForSuccess" xmlns:au="antlib:org.apache.ant.antunit" xmlns:itkodex="http://itkodex.hu/">
+
+  <property file="Scripts/common.build.properties" />
+  <property name="base.directory" location="ANTUnit" />
+  <property name="target.file" value="Target.js" />
+  <property name="expected.file" value="ConcatenatedJavaScript.js" />
+
+  <patternset id="javascript.source.files">
+    <include name="JavaScript_*.js" />
+	<exclude name="**/*.copyarea.db" />
+  </patternset>
+  
+  <target name="define" >
+    <taskdef 
+      name="concatenateJavaScriptFiles"
+      uri="http://itkodex.hu/"
+      classname="hu.itkodex.ant.ConcatenateJavaScriptFiles"
+      classpath="${project.binary.dir}"/>
+  </target>
+  
+  <target name="setUp" ></target>
+
+  <target name="testForSuccess" depends="define" >
+    <itkodex:concatenateJavaScriptFiles baseDirectory="${base.directory}" targetFile="${target.file}">
+      <fileset >
+        <patternset refid="javascript.source.files" />
+      </fileset>
+    </itkodex:concatenateJavaScriptFiles>
+    
+    <au:assertFilesMatch expected="${base.directory}/${expected.file}" actual="${base.directory}/${target.file}" />
+  </target>
+  
+  <target name="tearDown">
+  	<delete file="target.file" />
+  </target>
+</project>

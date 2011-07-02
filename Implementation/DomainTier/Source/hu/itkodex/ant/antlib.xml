@@ -1,0 +1,3 @@
+<antlib >
+  <taskdef name="concatenateJavaScriptFiles" classname="hu.itkodex.ant.ConcatenateJavaScriptFiles" />
+</antlib>
