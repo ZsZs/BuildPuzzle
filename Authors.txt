@@ -1,0 +1,8 @@
+BuildPuzzle Authors
+
+This software consists of voluntary contributions made by many
+individuals. For exact contribution history, see the revision history
+and logs, available at https://github.com/ZsZs/BuildPuzzle
+
+Peter Krima (peter.krima@itkodex.hu)
+Zsolt Zsuffa (zsolt.zsuffa@itkodex.hu)
