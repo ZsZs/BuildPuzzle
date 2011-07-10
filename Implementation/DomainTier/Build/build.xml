@@ -1,12 +1,15 @@
 <?xml version="1.0" ?>
 <project name="Build Custom ANT tasks" basedir="../" default="default">
 
-  <property name="view.root.path" location="../../../" />
+	<property name="project.root" location="${basedir}" />
+	<property name="view.root.path" location="../../../" />
+	<property name="common.build.path" value="${view.root.path}/BuildPuzzle/Implementation/BuildSnippets" />
 
-  <property file="Scripts/common.build.properties" />
-  <property file="${project.build.dir}/buildinfo.properties" />
-  <property file="${view.root.path}/ITKodex/Projects/Commons/Implementation/DomainTier/Build/buildinfo.properties" prefix="itcodexcommons"/>
-  <property file="${view.root.path}/ITKodex/Projects/LiTest/Implementation/DomainTier/Build/buildinfo.properties" prefix="litest"/>
+	<property file="${project.root}/Build/local.build.properties" />
+	<property file="${project.root}/Build/component.properties" />
+	<property file="${common.build.path}/common.build.properties" />
+	<property file="${view.root.path}/${processpuzzle.commons.domaintier.dir}/Build/component.properties" prefix="commons"/>
+	<property file="${view.root.path}/${processpuzzle.litest.domaintier.dir}/Build/component.properties" prefix="litest"/>
 
   <property name="test.file" value="ANTUnit/ANTUnitTests.xml"/>
 
@@ -15,8 +18,8 @@
 	  <include name="**/*.jar" />
 	</fileset>
   	
-	<fileset dir="${distribution.base.path}/${itcodexcommons.component.distribution.dir}">
-		<include name="${itcodexcommons.component.packaged.file}" />
+	<fileset dir="${distribution.base.path}/${commons.component.distribution.dir}">
+		<include name="${commons.component.packaged.file}" />
 	</fileset>
 	
 	<fileset dir="${distribution.base.path}/${litest.component.distribution.dir}">

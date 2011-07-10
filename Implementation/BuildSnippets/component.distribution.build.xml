@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="component.distribution" basedir="." default="distribute" xmlns:ac="antlib:net.sf.antcontrib">
+	<description>Distributes the compiled, tested and packaged component.</description>
+
+	<property name="distributed.java.archive.file" value="${component.distribution.path}\${component.packaged.file}" />
+	
+	<import file="distribute.artifact.build.xml"/>
+	<import file="distribution.clearcase.build.xml"/>
+	<import file="distribution.git.build.xml"/>
+	
+	<target name="distribute" depends="distribute.jar" description="Distribute packaged Java component"/>
+	
+	<target name="distribute.jar">
+		<echo>About to distribute ${component.packaged.file} component to ${component.distribution.path}.</echo>
+	    <distribute.artifact source.file="${project.distribution.dir}/${component.packaged.file}" destination.file="${distributed.java.archive.file}"/>
+	</target>
+</project>
+
