@@ -7,10 +7,22 @@
 		<property name="target.file" value="${appserver.deploy.dir}/${application.deployed.file}" />
 	</target>
 	
+	<target name="deploy" depends="wait-for-deploy">
+		<echo>Application ${application.url} is deployed.</echo>
+	</target>
+	
 	<target name="deploy-by-copy" depends="deploy-properties">
 		<echo>Deploying ${source.file} to ${target.file} URL: ${application.url}</echo>
 		<copy file="${source.file}" tofile="${target.file}" overwrite="true" />
 	</target>
 	
-	<target name="deploy" depends="deploy-by-copy" />
+	<target name="wait-for-deploy" depends="deploy-by-copy">
+		<waitfor maxwait="30" maxwaitunit="second">
+			<and>
+				<available file="${target.dir}" type="dir"/>
+				<http url="${application.url}" />
+			</and>
+		</waitfor>
+	</target>
+	
 </project>

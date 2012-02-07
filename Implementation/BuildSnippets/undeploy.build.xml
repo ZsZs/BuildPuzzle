@@ -15,13 +15,18 @@
 		<echo>Undeploying ${target.file} from URL: ${application.url}</echo>
 		<delete file="${target.file}" />
 
+<!--
 		<echo>Undeploying ${target.dir} from URL: ${application.url}</echo>
 		<delete file="${target.dir}" />
+-->
 	</target>
 
 	<target name="wait-for-undeploy" depends="undeploy-by-delete">
 		<waitfor maxwait="30" maxwaitunit="second">
-			<not><http url="${application.url}" /></not>
+			<and>
+				<not><available file="${target.dir}" type="dir"/></not>
+				<not><http url="${application.url}" /></not>
+			</and>
 		</waitfor>
 	</target>
 </project>
