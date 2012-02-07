@@ -41,7 +41,7 @@
          <test name="net.jsunit.StandaloneTest"/>
       </junit>
 
-    	<xslt basedir="${jsunit.logsDirectory}/xml-raw" destdir="${jsunit.logsDirectory}/xml" extension=".xml" style="${jsunit.report.xslt}"/>
+      <xslt basedir="${jsunit.logsDirectory}/xml-raw" destdir="${jsunit.logsDirectory}/xml" extension=".xml" style="${jsunit.report.xslt}"/>
     	
       <junitreport todir="${jsunit.logsDirectory}/xml">
          <fileset dir="${jsunit.logsDirectory}/xml">
