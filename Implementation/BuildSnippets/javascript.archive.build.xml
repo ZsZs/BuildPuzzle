@@ -11,7 +11,7 @@
    </condition>
    
 	<target name="concatenateJavaScriptFiles">	
-	   <exec executable="${sprocketize.app.name}" output="${javasript.packaged.file}" failonerror="true" logError="true">
+	   <exec executable="${sprocketize.app.name}" output="${project.temp.dir}/${component.name}.js" failonerror="true" logError="true">
 	      <arg value="-I" />
 	      <arg value="${web.project.javascript.source.dir}" />
 	      <arg value="-o" />
