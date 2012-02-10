@@ -29,6 +29,7 @@
 		<mkdir dir="${junit.reports.html.dir}" />
 		<mkdir dir="${jsunit.reports.dir}/html"/>
 		<mkdir dir="${jsunit.reports.dir}/xml"/>
+      <mkdir dir="${fitnesse.reports.dir}"/>
 		<mkdir dir="${pmd.reports.dir}"/>
 		<mkdir dir="${findbugs.reports.dir}"/>
 		

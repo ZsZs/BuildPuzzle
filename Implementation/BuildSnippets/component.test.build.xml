@@ -9,6 +9,8 @@
 	<target name="fitnesse-test" description="Run fitnesse acceptance tests." depends="unit-test">
 		<echo>Fitnesse dir: ${fitnesse.root.dir}, Test page: ${fitnesse.testpage}</echo>
 		
+		<delete dir="${fitnesse.testresults.dir}/${fitnesse.testpage}"/>
+		
 		<java dir="${fitnesse.root.dir}" classname="fitlibrary.batch.FitLibraryRunner" fork="true" resultproperty="FitRegressionResult" >
 			<sysproperty key="net.sourceforge.cobertura.datafile"	value="${cobertura.data.file}" />
 			
@@ -37,6 +39,16 @@
 			</classpath>
 		</java>
 		
+		<copy todir="${fitnesse.reports.dir}">
+		   <fileset dir="${fitnesse.testresults.dir}/${fitnesse.testpage}">
+		    	<include name="**/*.html"/>
+            <include name="**/*.gif"/>
+		      <include name="**/*.css"/>
+            <include name="**/*.js"/>
+		   </fileset>
+			<mapper type="flatten"/>
+		</copy>
+
 		<!-- Relies on FitNesse REST services
 		<java dir="${fitnesse.root.dir}" jar="${fitnesse.root.dir}/fitnesse.jar" output="${component.distribution.dir}/${fitnesse.testresults.file}" fork="true" resultproperty="FitRegressionResult" >
 			<arg value="-c"/>
