@@ -1,11 +1,13 @@
 /Implementation/Build/local.build.properties
 /Implementation/Build/Logs/ProcessPuzzle.log
+/Implementation/DomainTier/Binaries/
 /Implementation/DomainTier/Binaries/application_configuration
 /Implementation/DomainTier/Binaries/com
 /Implementation/DomainTier/Binaries/hu
 /Implementation/DomainTier/Binaries/Database.sql
 /Implementation/DomainTier/Binaries/hsqlrun.bat
 /Implementation/DomainTier/Binaries/hsqlrun.bat.default
+/Implementation/DomainTier/Binaries/log4j.properties
 /Implementation/DomainTier/Binaries/log4j.properties.default
 /Implementation/DomainTier/Binaries/server.properties
 /Implementation/DomainTier/Binaries/toolrun.bat
