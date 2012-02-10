@@ -13,12 +13,12 @@
 	
 	<target name="distribute.javascript" description="Distribute JavaScript with all available mechanism.">
 		<echo>About to distribute ${javasript.packaged.file} JavaScript to ${distributed.javascipt.file}.</echo>
-	    <distribute.artifact source.file="${project.distribution.dir}/${javasript.packaged.file}" destination.file="${distributed.javascipt.file}"/>
+	   <distribute.artifact source.file="${project.distribution.dir}/${javasript.packaged.file}" destination.file="${distributed.javascipt.file}"/>
 	</target>
 	
 	<target name="distribute.war" description="Distribute JavaScript with all available mechanism." >
 		<echo>About to distribute ${application.packaged.file} web archive to ${distributed.war.file}.</echo>
-	    <distribute.artifact source.file="${project.distribution.dir}/${application.packaged.file}" destination.file="${distributed.war.file}"/>
+	   <distribute.artifact source.file="${project.distribution.dir}/${application.packaged.file}" destination.file="${distributed.war.file}"/>
 	</target>
 </project>
 

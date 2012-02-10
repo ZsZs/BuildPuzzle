@@ -8,7 +8,7 @@
     <property name="jsunit.loggingPropertiesFile" value="${appserver.deploy.dir}/${application.name}/${jsunit.base.dir}/logging.properties"/>
     <property name="jsunit.logsDirectory" location="${jsunit.reports.dir}" />
     <property name="jsunit.testrunner.url" value="${application.url}/${jsunit.base.dir}/testRunner.html" />
-    <property name="web.project.javascript.testsuite.url" value="${application.url}/${application.javascript.testsuite}" />
+    <property name="web.project.javascript.testsuite.url" value="${application.url}/${component.javascript.testsuite}" />
     <property name="jsunit.url" value="${jsunit.testrunner.url}?testPage=${web.project.javascript.testsuite.url}" />
 
     <path id="jsunit.classpath">
@@ -49,6 +49,9 @@
          </fileset>
          <report format="frames" todir="${jsunit.logsDirectory}/html" />
       </junitreport>
+    	
+      <copy file="${project.root}/TEST-net.jsunit.StandaloneTest.xml" todir="${jsunit.reports.dir}/xml"/>
+      <delete file="${project.root}/TEST-net.jsunit.StandaloneTest.xml"/>
    </target>
 		
 </project>
