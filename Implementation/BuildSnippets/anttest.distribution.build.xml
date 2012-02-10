@@ -7,7 +7,7 @@
 	<property name="component.distribution.path" location="." />
 		
 	<import file="java.archive.build.xml"/>
-	<import file="distribution.build.xml"/>
+	<import file="component.distribution.build.xml"/>
 
 	<target name="all" depends="distribute" />
 	
