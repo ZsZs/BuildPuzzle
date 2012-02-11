@@ -1,8 +1,19 @@
 <project name="distribute.git" basedir="." default="distribute">
-	<description>Distributes a deployable file with copy a Git Commit.</description>
+	<description>Distributes a deployable file with copy to Git Repository and ads it.</description>
+		
+   <import file="git-ant.xml"/>
 	
-	<target name="distribute">
+   <target name="distribute" depends="commit-deployable"/>
+	
+	<target name="copy-deployable">
 		<copy preservelastmodified="true" overwrite="true" file="${deployable.source.file}" tofile="${deployable.destination.file}" failonerror="false" />
 	</target>
+	
+   <target name="commit-deployable" depends="copy-deployable">
+      <property name="commitMessage" value="'${component.build.commit.message} ${deployable.destination.file}'"/>
+   	<property name="current.dir" location="." />
+      <git-add dir="${current.dir}" file="${component.packaged.file}" />
+   	<git-commit-with-message message="${commitMessage}" />
+   </target>
 </project>
 

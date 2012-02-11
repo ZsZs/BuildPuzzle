@@ -4,14 +4,12 @@
 	
 	<property file="common.build.properties" />
 	<property name="component.packaged.file" value="tesztfile.txt" />
-	<property name="component.distribution.path" location="." />
+	<property name="component.distribution.path" location="Temp" />
 		
-	<import file="java.archive.build.xml"/>
 	<import file="component.distribution.build.xml"/>
 
 	<target name="all" depends="distribute" />
 	
-	<target name="distribute" depends="package, component.distribution.distribute" description="Distribute packaged component." />
+	<target name="distribute" depends="component.distribution.distribute" description="Distribute packaged component." />
 	
-	<target name="package" depends="component.packaging.package" description="Package compiled and tested component." />
 </project>
