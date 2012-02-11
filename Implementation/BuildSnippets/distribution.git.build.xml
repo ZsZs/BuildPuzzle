@@ -1,4 +1,4 @@
-<project name="distribute.git" basedir="." default="distribute">
+<project name="distribute.git" basedir="." default="distribute" xmlns:ac="antlib:net.sf.antcontrib">
 	<description>Distributes a deployable file with copy to Git Repository and ads it.</description>
 		
    <import file="git-ant.xml"/>
@@ -10,10 +10,17 @@
 	</target>
 	
    <target name="commit-deployable" depends="copy-deployable">
-      <property name="commitMessage" value="'${component.build.commit.message} ${deployable.destination.file}'"/>
-   	<property name="current.dir" location="." />
-      <git-add dir="${current.dir}" file="${component.packaged.file}" />
-   	<git-commit-with-message message="${commitMessage}" />
+      <ac:if>
+         <equals arg1="${distribution.commit}" arg2="yes" />
+         <ac:then>
+            <dirname property="destination.dir" file="${deployable.destination.file}" />
+            <basename property="filename" file="${deployable.destination.file}" />
+            <property name="commitMessage" value="'${component.build.commit.message} ${filename}'"/>
+         	
+            <git-add dir="${destination.dir}" file="${filename}" />
+         	<git-commit-with-message message="${commitMessage}" />
+         </ac:then>
+      </ac:if>    
    </target>
 </project>
 

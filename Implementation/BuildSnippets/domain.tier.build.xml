@@ -3,6 +3,7 @@
 <project name="Build Domain Tier" basedir="." default="distribute">
 
 	<property environment="env" />
+   <property name="component.distribution.dir" value="${distribution.base.dir}" />
 	<property name="component.distribution.path" value="${distribution.base.path}" />
 	<property name="component.packaged.file" value="${component.name}-${component.version}.${component.package.extension}" />
 
