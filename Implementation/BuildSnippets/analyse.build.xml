@@ -11,9 +11,9 @@
 			<ruleset>rulesets/favorites.xml</ruleset>
 			<ruleset>basic</ruleset>
 			<ruleset>design</ruleset>
-			<formatter type="xml" toFile="${pmd.reports.dir}/domainlogic-pmd.xml" linkPrefix="http://pmd.sourceforge.net/xref/" />
+			<formatter type="xml" toFile="${pmd.reports.dir}/domainlogic-pmd.xml" linkPrefix="${pmd.link.prefix}" />
 			<fileset dir="${project.source.dir}" includes="**/*.java" />
-			<formatter type="html" toFile="${pmd.reports.dir}/domainlogic-pmd.html" linkPrefix="http://pmd.sourceforge.net/xref/" />
+			<formatter type="html" toFile="${pmd.reports.dir}/domainlogic-pmd.html" linkPrefix="${pmd.link.prefix}" />
 			<fileset dir="${project.source.dir}" includes="**/*.java" />
 		</pmd>
 	</target>
