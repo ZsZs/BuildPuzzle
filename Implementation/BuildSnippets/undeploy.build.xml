@@ -14,18 +14,19 @@
 	<target name="undeploy-by-delete" depends="undeploy-properties">
 		<echo>Undeploying ${target.file} from URL: ${application.url}</echo>
 		<delete file="${target.file}" />
-
-<!--
-		<echo>Undeploying ${target.dir} from URL: ${application.url}</echo>
-		<delete file="${target.dir}" />
--->
+      <waitfor maxwait="30" maxwaitunit="second">
+         <and>
+            <not><http url="${application.url}" /></not>
+         </and>
+      </waitfor>
+		<sleep seconds="5"/>
+		<delete dir="${target.dir}" />
 	</target>
 
 	<target name="wait-for-undeploy" depends="undeploy-by-delete">
 		<waitfor maxwait="30" maxwaitunit="second">
 			<and>
 				<not><available file="${target.dir}" type="dir"/></not>
-				<not><http url="${application.url}" /></not>
 			</and>
 		</waitfor>
 	</target>
