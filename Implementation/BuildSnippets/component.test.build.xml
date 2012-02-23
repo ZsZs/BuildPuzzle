@@ -7,7 +7,7 @@
 	</target>
 	
 	<target name="fitnesse-test" description="Run fitnesse acceptance tests." depends="unit-test">
-		<echo>Fitnesse dir: ${fitnesse.root.dir}, Test page: ${fitnesse.testpage}</echo>
+		<echo>Fitnesse dir: ${fitnesse.root.dir}, Test results directory: ${fitnesse.testresults.dir}, Test page: ${fitnesse.testpage}</echo>
 		
 		<delete dir="${fitnesse.testresults.dir}/${fitnesse.testpage}"/>
 		
