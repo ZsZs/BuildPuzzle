@@ -3,7 +3,8 @@
 	<description>Concatenates JavaScript and CSS files into one file and compresses the result.</description>
 
    <property name="javasript.packaged.name" value="${component.name}-${component.version}" />
-	<property name="javasript.packaged.file" value="${javasript.packaged.name}.js" />
+	<property name="javasript.packaged.file" value="${javasript.packaged.name}${javascript.nocompressed.file.suffix}" />
+   <property name="javasript.packaged.file.minified" value="${javasript.packaged.name}${javascript.compressed.file.suffix}" />
 	<property name="javascript.archive.file" value="${project.root}/${project.distribution.dir}/${javasript.packaged.file}" />
 	  
    <condition property="sprocketize.app.name" value="sprockets.bat" else="sprockets">
@@ -24,6 +25,17 @@
 	   </copy>
 		
 	</target>
+	
+	<target name="minifyJavaScriptFiles" depends="concatenateJavaScriptFiles">
+	   <description>Minify the JS file.</description>
+		<echo>${project.root}/${project.distribution.dir}/${javasript.packaged.file}</echo>
+      <echo>${project.root}/${project.distribution.dir}/${javasript.packaged.file.minified}</echo>
+	   <java classname="com.yahoo.platform.yui.compressor.YUICompressor" classpathref="yui.compressor.classpath" fork="true" failonerror="true" >
+	      <arg value="-o" />
+	      <arg value="${project.root}/${project.distribution.dir}/${javasript.packaged.file.minified}" />
+         <arg value="${project.root}/${project.distribution.dir}/${javasript.packaged.file}" />
+	    </java>
+	</target>
   
-	<target name="archive" depends="concatenateJavaScriptFiles" ></target>
+	<target name="archive" depends="minifyJavaScriptFiles"></target>
 </project>
