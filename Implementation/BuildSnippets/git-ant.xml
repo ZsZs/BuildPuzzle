@@ -8,8 +8,6 @@
       <attribute name="failerror" default="false" />
       <element name="args" optional="true" />
       <sequential>
-         <echo message="git dir @{dir}" />
-         <echo message="git @{command}" />
          <exec executable="${git.executable.dir}/git.cmd" dir="@{dir}" failonerror="@{failerror}">
             <arg line="@{command} @{options}" />
             <args />
@@ -33,10 +31,10 @@
    
    <macrodef name="git-push">
       <attribute name="remote" default="origin"/>
-      <attribute name="dir" />
+      <attribute name="dir" default=""/>
       <attribute name="options" default="" />
-      <attribute name="localRef" />
-      <attribute name="remoteRef" />
+      <attribute name="localRef" default="" />
+      <attribute name="remoteRef" default="" />
       <attribute name="failerror" default="false" />
       <sequential>
          <git command="push" dir="@{dir}" options="@{options}" failerror="@{failerror}" >

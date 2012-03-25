@@ -21,6 +21,13 @@
          	<git-commit-with-message message="${commitMessage}" />
          </ac:then>
       </ac:if>    
+   	
+      <ac:if>
+         <equals arg1="${distribution.push}" arg2="yes" />
+         <ac:then>
+            <git-push />
+         </ac:then>
+      </ac:if>    
    </target>
 </project>
 
