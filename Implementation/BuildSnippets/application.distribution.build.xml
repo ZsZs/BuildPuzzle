@@ -3,6 +3,7 @@
 	<description>Distributes the compiled, tested and packaged application or component.</description>
 
 	<property name="distributed.javascipt.file" value="${component.distribution.path}/${javasript.packaged.file}" />
+   <property name="distributed.javascipt.file.minified" value="${component.distribution.path}/${javasript.packaged.file.minified}" />
 	<property name="distributed.war.file" value="${component.distribution.path}/${application.packaged.file}" />
 	
 	<import file="distribute.artifact.build.xml"/>
@@ -14,6 +15,7 @@
 	<target name="distribute.javascript" description="Distribute JavaScript with all available mechanism.">
 		<echo>About to distribute ${javasript.packaged.file} JavaScript to ${distributed.javascipt.file}.</echo>
 	   <distribute.artifact source.file="${project.distribution.dir}/${javasript.packaged.file}" destination.file="${distributed.javascipt.file}"/>
+      <distribute.artifact source.file="${project.distribution.dir}/${javasript.packaged.file.minified}" destination.file="${distributed.javascipt.file.minified}"/>
 	</target>
 	
 	<target name="distribute.war" description="Distribute JavaScript with all available mechanism." >
