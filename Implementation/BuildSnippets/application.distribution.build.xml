@@ -10,14 +10,18 @@
 	<import file="distribution.clearcase.build.xml"/>
 	<import file="distribution.git.build.xml"/>
 	
-	<target name="distribute" depends="distribute.javascript, distribute.war" description="Distribute compilled JavaScript and Web Archive"/>
+	<target name="distribute" depends="distribute.javascript, distribute.javascript.minified, distribute.war" description="Distribute compilled JavaScript and Web Archive"/>
 	
 	<target name="distribute.javascript" description="Distribute JavaScript with all available mechanism.">
 		<echo>About to distribute ${javasript.packaged.file} JavaScript to ${distributed.javascipt.file}.</echo>
 	   <distribute.artifact source.file="${project.distribution.dir}/${javasript.packaged.file}" destination.file="${distributed.javascipt.file}"/>
-      <distribute.artifact source.file="${project.distribution.dir}/${javasript.packaged.file.minified}" destination.file="${distributed.javascipt.file.minified}"/>
 	</target>
 	
+   <target name="distribute.javascript.minified" description="Distribute JavaScript with all available mechanism.">
+      <echo>About to distribute ${javasript.packaged.file.minified} JavaScript to ${distributed.javascipt.file.minified}.</echo>
+      <distribute.artifact source.file="${project.distribution.dir}/${javasript.packaged.file.minified}" destination.file="${distributed.javascipt.file.minified}"/>
+   </target>
+   
 	<target name="distribute.war" description="Distribute JavaScript with all available mechanism." >
 		<echo>About to distribute ${application.packaged.file} web archive to ${distributed.war.file}.</echo>
 	   <distribute.artifact source.file="${project.distribution.dir}/${application.packaged.file}" destination.file="${distributed.war.file}"/>
