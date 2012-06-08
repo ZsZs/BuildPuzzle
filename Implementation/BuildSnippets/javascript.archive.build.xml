@@ -30,7 +30,7 @@
 	   <description>Minify the JS file.</description>
 		<echo>${project.root}/${project.distribution.dir}/${javasript.packaged.file}</echo>
       <echo>${project.root}/${project.distribution.dir}/${javasript.packaged.file.minified}</echo>
-	   <java classname="com.yahoo.platform.yui.compressor.YUICompressor" classpathref="yui.compressor.classpath" fork="true" failonerror="true" >
+	   <java classname="com.yahoo.platform.yui.compressor.YUICompressor" classpathref="yui.compressor.classpath" fork="true" failonerror="false" >
 	      <arg value="-o" />
 	      <arg value="${project.root}/${project.distribution.dir}/${javasript.packaged.file.minified}" />
          <arg value="${project.root}/${project.distribution.dir}/${javasript.packaged.file}" />
