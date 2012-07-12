@@ -6,12 +6,16 @@
 	<property name="javasript.packaged.file" value="${javasript.packaged.name}${javascript.nocompressed.file.suffix}" />
    <property name="javasript.packaged.file.minified" value="${javasript.packaged.name}${javascript.compressed.file.suffix}" />
 	<property name="javascript.archive.file" value="${project.root}/${project.distribution.dir}/${javasript.packaged.file}" />
+   <property name="javasript.packaged.library.file" value="${javasript.packaged.name}${javascript.nocompressed.library.file.suffix}" />
+   <property name="javasript.packaged.library.file.minified" value="${javasript.packaged.name}${javascript.compressed.library.file.suffix}" />
+   <property name="javascript.archive.library.file" value="${project.root}/${project.distribution.dir}/${javasript.packaged.library.file}" />
 	  
    <condition property="sprocketize.app.name" value="sprockets.bat" else="sprockets">
       <os family="windows" />
    </condition>
    
-	<target name="concatenateJavaScriptFiles">	
+	<!-- Archive source files -->
+	<target name="concatenateSourceJavaScriptFiles">	
 	   <exec executable="${sprocketize.app.name}" output="${project.temp.dir}/${component.name}.js" failonerror="true" logError="true">
 	      <arg value="-I" />
 	      <arg value="${web.project.javascript.source.dir}" />
@@ -26,16 +30,40 @@
 		
 	</target>
 	
-	<target name="minifyJavaScriptFiles" depends="concatenateJavaScriptFiles">
-	   <description>Minify the JS file.</description>
-		<echo>${project.root}/${project.distribution.dir}/${javasript.packaged.file}</echo>
-      <echo>${project.root}/${project.distribution.dir}/${javasript.packaged.file.minified}</echo>
+	<target name="minifySourceJavaScriptFiles" depends="concatenateSourceJavaScriptFiles">
 	   <java classname="com.yahoo.platform.yui.compressor.YUICompressor" classpathref="yui.compressor.classpath" fork="true" failonerror="true" >
 	      <arg value="-o" />
 	      <arg value="${project.root}/${project.distribution.dir}/${javasript.packaged.file.minified}" />
          <arg value="${project.root}/${project.distribution.dir}/${javasript.packaged.file}" />
 	    </java>
 	</target>
+   
+   <!-- Archive library files -->
+   <target name="concatenateLibraryJavaScriptFiles">   
+      <exec executable="${sprocketize.app.name}" output="${project.temp.dir}/${component.name}${javascript.library.name.suffix}.js" failonerror="true" logError="true">
+         <arg value="-I" />
+         <arg value="${web.project.javascript.library.dir}" />
+         <arg value="-o" />
+         <arg value="${project.temp.dir}" />
+      </exec>
+      
+      <copy todir="${project.root}/${project.distribution.dir}" failonerror="true" filtering="true">
+         <fileset dir="${project.temp.dir}" includes="${component.name}${javascript.library.name.suffix}-*.js"/>
+         <mapper type="glob" from="${component.name}${javascript.library.name.suffix}-*.js" to="${javasript.packaged.library.file}" />
+      </copy>
+      
+   </target>
+   
+   <target name="minifyLibraryJavaScriptFiles" depends="concatenateLibraryJavaScriptFiles">
+      <description>Minify the library JS file.</description>
+      <echo>${project.root}/${project.distribution.dir}/${javasript.packaged.library.file}</echo>
+      <echo>${project.root}/${project.distribution.dir}/${javasript.packaged.library.file.minified}</echo>
+      <java classname="com.yahoo.platform.yui.compressor.YUICompressor" classpathref="yui.compressor.classpath" fork="true" failonerror="true" >
+         <arg value="-o" />
+         <arg value="${project.root}/${project.distribution.dir}/${javasript.packaged.library.file.minified}" />
+         <arg value="${project.root}/${project.distribution.dir}/${javasript.packaged.library.file}" />
+       </java>
+   </target>
   
-	<target name="archive" depends="minifyJavaScriptFiles"></target>
+	<target name="archive" depends="minifySourceJavaScriptFiles, minifyLibraryJavaScriptFiles"></target>
 </project>

@@ -4,24 +4,36 @@
 
 	<property name="distributed.javascipt.file" value="${component.distribution.path}/${javasript.packaged.file}" />
    <property name="distributed.javascipt.file.minified" value="${component.distribution.path}/${javasript.packaged.file.minified}" />
+   <property name="distributed.javascipt.library.file" value="${component.distribution.path}/${javasript.packaged.library.file}" />
+   <property name="distributed.javascipt.library.file.minified" value="${component.distribution.path}/${javasript.packaged.library.file.minified}" />
 	<property name="distributed.war.file" value="${component.distribution.path}/${application.packaged.file}" />
 	
 	<import file="distribute.artifact.build.xml"/>
 	<import file="distribution.clearcase.build.xml"/>
 	<import file="distribution.git.build.xml"/>
 	
-	<target name="distribute" depends="distribute.javascript, distribute.javascript.minified, distribute.war" description="Distribute compilled JavaScript and Web Archive"/>
+	<target name="distribute" depends="distribute.javascript.source, distribute.javascript.source.minified, distribute.javascript.library, distribute.javascript.library.minified, distribute.war" description="Distribute compilled JavaScript and Web Archive"/>
 	
-	<target name="distribute.javascript" description="Distribute JavaScript with all available mechanism.">
+	<target name="distribute.javascript.source" description="Distribute JavaScript with all available mechanism.">
 		<echo>About to distribute ${javasript.packaged.file} JavaScript to ${distributed.javascipt.file}.</echo>
 	   <distribute.artifact source.file="${project.distribution.dir}/${javasript.packaged.file}" destination.file="${distributed.javascipt.file}"/>
 	</target>
 	
-   <target name="distribute.javascript.minified" description="Distribute JavaScript with all available mechanism.">
+   <target name="distribute.javascript.source.minified" description="Distribute JavaScript with all available mechanism.">
       <echo>About to distribute ${javasript.packaged.file.minified} JavaScript to ${distributed.javascipt.file.minified}.</echo>
       <distribute.artifact source.file="${project.distribution.dir}/${javasript.packaged.file.minified}" destination.file="${distributed.javascipt.file.minified}"/>
    </target>
    
+   <target name="distribute.javascript.library" description="Distribute JavaScript with all available mechanism.">
+      <echo>About to distribute ${javasript.packaged.library.file} JavaScript to ${distributed.javascipt.library.file}.</echo>
+      <distribute.artifact source.file="${project.distribution.dir}/${javasript.packaged.library.file}" destination.file="${distributed.javascipt.library.file}"/>
+   </target>
+         
+   <target name="distribute.javascript.library.minified" description="Distribute JavaScript with all available mechanism.">
+      <echo>About to distribute ${javasript.packaged.library.file.minified} JavaScript to ${distributed.javascipt.library.file.minified}.</echo>
+      <distribute.artifact source.file="${project.distribution.dir}/${javasript.packaged.library.file.minified}" destination.file="${distributed.javascipt.library.file.minified}"/>
+   </target>
+         
 	<target name="distribute.war" description="Distribute JavaScript with all available mechanism." >
 		<echo>About to distribute ${application.packaged.file} web archive to ${distributed.war.file}.</echo>
 	   <distribute.artifact source.file="${project.distribution.dir}/${application.packaged.file}" destination.file="${distributed.war.file}"/>
