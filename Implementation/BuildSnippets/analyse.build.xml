@@ -7,15 +7,18 @@
 	</target>
 
 	<target name="pmd" depends="findbugs">
-		<pmd shortFilenames="true" targetjdk="1.5">
-			<ruleset>rulesets/favorites.xml</ruleset>
-			<ruleset>basic</ruleset>
-			<ruleset>design</ruleset>
-			<formatter type="xml" toFile="${pmd.reports.dir}/domainlogic-pmd.xml" linkPrefix="${pmd.link.prefix}" />
-			<fileset dir="${project.source.dir}" includes="**/*.java" />
-			<formatter type="html" toFile="${pmd.reports.dir}/domainlogic-pmd.html" linkPrefix="${pmd.link.prefix}" />
+		<pmd shortFilenames="true">
+			<sourceLanguage name="java" version="1.7"/>
+			<ruleset>java-basic</ruleset>
+			<formatter type="xml" toFile="${pmd.reports.dir}/domainlogic-pmd.xml">
+				<param name="linkPrefix" value="${pmd.link.prefix}"/>
+			</formatter>
+			<formatter type="net.sourceforge.pmd.renderers.HTMLRenderer" toFile="${pmd.reports.dir}/domainlogic-pmd.html">
+				<param name="linkPrefix" value="${pmd.link.prefix}"/>
+			</formatter>
 			<fileset dir="${project.source.dir}" includes="**/*.java" />
 		</pmd>
+		<xslt in="${pmd.reports.dir}/domainlogic-pmd.xml" style="${pmd.root.dir}/etc/xslt/wz-pmd-report.xslt" out="${pmd.reports.dir}/domainlogic-pmd.html" />
 	</target>
 
 	<target name="findbugs" depends="alternate-coverage-report">
