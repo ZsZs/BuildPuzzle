@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project name="component.testing" basedir="." default="test">
+<project name="component.testing" basedir="." default="test" xmlns:ac="antlib:net.sf.antcontrib">
 	<description>Tests compiled component.</description>
 	
 	<target name="test" depends="fitnesse-test">
@@ -22,13 +22,13 @@
 			
 			<arg value="-resultsDiry"/>
 			<arg value="${fitnesse.testresults.dir}"/>
-			
+				
 			<arg value="-port"/>
 			<arg value="9004"/>
-			
+				
 			<arg value="-junitXmlOutput"/>
 			<arg value="${fitnesse.testresults.file}"/>
-			
+				
 			<classpath>
 				<pathelement location="${fitnesse.root.dir}/fitlibrary.jar" />
 				<pathelement location="${fitnesse.root.dir}/fitnesse.jar" />
@@ -38,14 +38,14 @@
 				<path refid="compile.test.classpath" />
 			</classpath>
 		</java>
-		
+			
 		<copy todir="${fitnesse.reports.dir}">
 		   <fileset dir="${fitnesse.testresults.dir}/${fitnesse.testpage}">
 		    	<include name="**/*.html"/>
-            <include name="**/*.gif"/>
-		      <include name="**/*.css"/>
-            <include name="**/*.js"/>
-		   </fileset>
+		        <include name="**/*.gif"/>
+				<include name="**/*.css"/>
+	        	<include name="**/*.js"/>
+			</fileset>
 			<mapper type="flatten"/>
 		</copy>
 
