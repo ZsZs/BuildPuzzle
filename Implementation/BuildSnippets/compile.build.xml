@@ -7,7 +7,7 @@
 	</target>
 	
 	<target name="compile-domainlogic-acceptancetest" depends="compile-domainlogic-unit-test">
-		<javac srcdir="${project.acceptancetests.dir}" destdir="${project.test.classes.dir}" debug="true" encoding="Cp1250">
+		<javac srcdir="${project.acceptancetests.dir}" destdir="${project.test.classes.dir}" debug="true" encoding="Cp1250" includeantruntime="false">
 			<classpath>
 				<path refid="compile.test.classpath" />
 			</classpath>
@@ -21,7 +21,7 @@
 	</target>
 
 	<target name="compile-domainlogic-unit-test" depends="compile-domainlogic,cobertura-instrument">
-		<javac srcdir="${project.unittests.dir}" destdir="${project.test.classes.dir}" debug="true" encoding="Cp1250">
+		<javac srcdir="${project.unittests.dir}" destdir="${project.test.classes.dir}" debug="true" encoding="Cp1250" includeantruntime="false">
 			<classpath refid="compile.test.classpath" />
 		</javac>
 		
@@ -51,14 +51,10 @@
 			<ignore regex="com.processpuzzle.document.domain.template.diff_match_patch" />
 			<ignore regex="set*" />
 			 
-			 <fileset dir="${project.production.classes.dir}">
+			<fileset dir="${project.production.classes.dir}">
 				  <include name="**/*.class" />
-				 
-			 	  <!--
-			 	  <exclude name="**/*Test.class" />
-				  <exclude name="**/*TestSuite.class" />
-				  <exclude name="**/*Fixture.class" /> -->
 				  <exclude name="org/dom4j/**/*.class" />
+				  <exclude name="Log/**/*.*" />
 			 </fileset>
 		</cobertura-instrument>
 
@@ -68,7 +64,7 @@
 	</target>
 	
 	<target name="compile-domainlogic">
-		<javac srcdir="${project.source.dir}" destdir="${project.production.classes.dir}" debug="true" debuglevel="vars,lines,source" encoding="Cp1250">
+		<javac srcdir="${project.source.dir}" destdir="${project.production.classes.dir}" debug="true" debuglevel="vars,lines,source" encoding="Cp1250" includeantruntime="false">
 			<classpath refid="compile.production.classpath" />
 		</javac>
 		
