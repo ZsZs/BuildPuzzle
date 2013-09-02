@@ -80,6 +80,7 @@
 		<path refid="processpuzzle.production.classpath"/>
 		<path refid="processpuzzle.development.classpath"/>
 		<path refid="project.auxiliary.classpath"/>
+		<path refid="processpuzzle.distribution.classpath"/>
 	</path>
 	
 	<path id="compile.test.classpath">
