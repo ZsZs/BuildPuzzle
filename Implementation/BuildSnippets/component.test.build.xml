@@ -67,13 +67,7 @@
 		-->
 	</target>
 	
-	<target name="unit-test">
-		<echo message="${common.dependent.library.path}"/>
-		<echo message="${project.production.classes.dir}"/>
-		<echo>${project.test.classes.dir}</echo>
-		<echo>${project.unittests.dir}</echo>
-		<echo>${junit.reports.xml.dir}</echo>
-		
+	<target name="unit-test">		
 		<junit printsummary="withOutAndErr" haltonfailure="true" fork="yes" maxmemory="512m" failureProperty="unit.test.failed">
 			<!-- Specify the name of the coverage data file to use. -->
 			<sysproperty key="net.sourceforge.cobertura.datafile"	value="${cobertura.data.file}" />
