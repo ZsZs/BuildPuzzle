@@ -25,7 +25,5 @@
 	            <attribute name="Built-Date" value="${TODAY}"/>
 	        </manifest>		
 		</jar>
-		
-		<copy file="${project.distribution.dir}/${component.packaged.file}" tofile="${fitnesse.projects.dir}/${project.name}/${component.packaged.file}" failonerror="false"/>
 	</target>
 </project>
