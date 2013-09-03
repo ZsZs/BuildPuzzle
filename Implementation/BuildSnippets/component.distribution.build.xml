@@ -3,7 +3,7 @@
 	<description>Distributes the compiled, tested and packaged component.</description>
 
 	<property name="distributed.java.archive.file" value="${component.distribution.path}/${component.packaged.file}" />
-	<property name="distributed.component.properties.file" value="${component.distribution.path}/${component.name}-${component.version}.properties" />
+	<property name="distributed.component.properties.file" value="${component.distribution.path}/${component.properties.file}" />
 	
 	<import file="distribute.artifact.build.xml"/>
 	<import file="distribution.clearcase.build.xml"/>

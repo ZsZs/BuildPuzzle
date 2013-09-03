@@ -47,6 +47,7 @@
 
 		<cobertura-instrument todir="${cobertura.instrumented.dir}" datafile="${cobertura.data.file}">
 			<ignore regex="org.apache.log4j.*" />
+			<ignore regex="org.slf4j.*" />
 			<ignore regex="com.processpuzzle.document.domain.template.CompositeTemplateElement.get*" />
 			<ignore regex="com.processpuzzle.document.domain.template.diff_match_patch" />
 			<ignore regex="set*" />
@@ -58,6 +59,7 @@
 				  <exclude name="Log/**/*.*" />
 			</fileset>
 			<auxClasspath refid="processpuzzle.production.classpath"/>
+			<auxClasspath refid="project.auxiliary.classpath"/>
 		</cobertura-instrument>
 
 		<!-- <copy todir="${fitnesse.projects.dir}/${project.name}/Cobertura/Instrumented" failonerror="false" >
@@ -75,6 +77,7 @@
 		
 		<javac srcdir="${project.source.dir}" destdir="${project.production.classes.dir}" debug="true" debuglevel="vars,lines,source" encoding="Cp1250" includeantruntime="false">
 			<classpath refid="compile.production.classpath" />
+			<classpath refid="project.auxiliary.classpath" />
 		</javac>
 		
 		<copy todir="${project.production.classes.dir}">
