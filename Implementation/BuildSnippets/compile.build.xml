@@ -3,7 +3,7 @@
 	<description>Compiles sources, tests of component.</description>
 	
 	<target name="compile" depends="compile-domainlogic-acceptancetest">
-		<echo>Compilation of ${component.packaged.file} component finished.</echo>
+		<echo>Compilation of ${component.packaged.file} component is finished.</echo>
 	</target>
 	
 	<target name="compile-domainlogic-acceptancetest" depends="compile-domainlogic-unit-test">
@@ -53,9 +53,11 @@
 			 
 			<fileset dir="${project.production.classes.dir}">
 				  <include name="**/*.class" />
+				  <include name="**/*.properties" />
 				  <exclude name="org/dom4j/**/*.class" />
 				  <exclude name="Log/**/*.*" />
-			 </fileset>
+			</fileset>
+			<auxClasspath refid="processpuzzle.production.classpath"/>
 		</cobertura-instrument>
 
 		<!-- <copy todir="${fitnesse.projects.dir}/${project.name}/Cobertura/Instrumented" failonerror="false" >
@@ -64,6 +66,13 @@
 	</target>
 	
 	<target name="compile-domainlogic">
+		<echo>About to compile file of ${component.packaged.file}.</echo>
+		<copy todir="${project.production.classes.dir}">
+			<fileset dir="${project.configuration.dir}">
+				<include name="*.properties" />
+			</fileset>
+		</copy>
+		
 		<javac srcdir="${project.source.dir}" destdir="${project.production.classes.dir}" debug="true" debuglevel="vars,lines,source" encoding="Cp1250" includeantruntime="false">
 			<classpath refid="compile.production.classpath" />
 		</javac>
