@@ -7,9 +7,10 @@
 
 		<delete dir="${project.binary.dir}" />
 		<delete dir="${project.distribution.dir}" />
-		<delete dir="${project.library.dir}" />
+		<delete dir="${project.build.dir}/${project.library.dir}" />
+		<delete dir="${project.build.dir}/${project.log.dir}" />
 		<delete dir="${project.reports.dir}" />
-      <delete dir="${project.temp.dir}" />
+		<delete dir="${project.temp.dir}" />
 		
  		<mkdir dir="${project.binary.dir}" />
  		<mkdir dir="${project.library.dir}" />
@@ -19,7 +20,7 @@
  		<mkdir dir="${project.production.sources.dir}" />
 		<mkdir dir="${project.test.classes.dir}" />
  		<mkdir dir="${project.test.sources.dir}" />
-      <mkdir dir="${project.temp.dir}" />
+		<mkdir dir="${project.temp.dir}" />
 		
 		<mkdir dir="${project.distribution.dir}" />
 		<mkdir dir="${cobertura.instrumented.dir}" />
@@ -29,7 +30,7 @@
 		<mkdir dir="${junit.reports.html.dir}" />
 		<mkdir dir="${jsunit.reports.dir}/html"/>
 		<mkdir dir="${jsunit.reports.dir}/xml"/>
-      <mkdir dir="${fitnesse.reports.dir}"/>
+		<mkdir dir="${fitnesse.reports.dir}"/>
 		<mkdir dir="${pmd.reports.dir}"/>
 		<mkdir dir="${findbugs.reports.dir}"/>
 		
