@@ -51,7 +51,6 @@
 			<include name="cobertura-2.0.3.jar" />
 			<include name="lib/**/*.jar" />
 		</fileset>
-		<path refid="processpuzzle.production.classpath"/>		
 	</path>
 
 	<path id="fitnesse.classpath">
@@ -80,7 +79,6 @@
 		<path refid="processpuzzle.production.classpath"/>
 		<path refid="processpuzzle.development.classpath"/>
 		<path refid="project.auxiliary.classpath"/>
-		<path refid="processpuzzle.distribution.classpath"/>
 	</path>
 	
 	<path id="compile.test.classpath">
