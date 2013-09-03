@@ -14,6 +14,7 @@
 	<target name="distribute.jar">
 		<echo>About to distribute ${component.packaged.file} component to ${component.distribution.path}.</echo>
 	    <distribute.artifact source.file="${project.distribution.dir}/${component.packaged.file}" destination.file="${distributed.java.archive.file}"/>
+	    <distribute.artifact source.file="${project.distribution.dir}/${component.packaged.file}" destination.file="${fitnesse.projects.dir}/${project.name}/${component.packaged.file}"/>
 	</target>
 
 	<target name="distribute.component.properties">
