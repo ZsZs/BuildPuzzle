@@ -1,6 +1,6 @@
 package hu.itkodex.ant;
 
-import hu.itkodex.commons.file.FileHelper;
+import com.processpuzzle.commons.file.FileHelper;
 
 import java.io.File;
 import java.io.IOException;

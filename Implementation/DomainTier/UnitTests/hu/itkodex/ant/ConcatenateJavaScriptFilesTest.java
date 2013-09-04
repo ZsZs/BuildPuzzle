@@ -1,11 +1,11 @@
 package hu.itkodex.ant;
 
-import static hu.itkodex.litest.matchers.file.FileExist.isExistingFile;
+import static com.processpuzzle.litest.matchers.file.FileExist.isExistingFile;
 import static org.hamcrest.Matchers.equalTo;
 import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
-import hu.itkodex.commons.file.FileHelper;
+import com.processpuzzle.commons.file.FileHelper;
 
 import java.io.File;
 import java.io.IOException;
