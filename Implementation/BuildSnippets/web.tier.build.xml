@@ -2,7 +2,7 @@
 <project name="Build Web Tier" basedir="." default="all">
 
 	<property environment="env" />
-   <property name="component.distribution.dir" value="${distribution.base.dir}" />
+    <property name="component.distribution.dir" value="${distribution.base.dir}" />
 	<property name="component.distribution.path" value="${distribution.base.path}" />
 	<property name="component.packaged.file" value="${component.name}-${component.version}.${component.package.extension}" />
 	<property name="application.packaged.file" value="${application.name}-${component.version}.${application.package.extension}" />
@@ -44,7 +44,7 @@
 	
 	<path id="cobertura.classpath">
 		<fileset dir="${cobertura.dir}">
-			<include name="cobertura.jar" />
+			<include name="cobertura-2.0.3.jar" />
 			<include name="lib/**/*.jar" />
 			<exclude name="**/*.copyarea.db" />
 		</fileset>
@@ -71,7 +71,7 @@
 
 	<path id="pmd.classpath">
 		<fileset dir="${pmd.root.dir}">
-			<include name="lib/pmd-4.2.5.jar" />
+			<include name="lib/**/*.jar" />
 			<exclude name="**/*.copyarea.db" />
 		</fileset>
 	</path>
