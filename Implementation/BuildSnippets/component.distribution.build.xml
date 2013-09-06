@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE project>
 <project name="component.distribution" basedir="." default="distribute" xmlns:ac="antlib:net.sf.antcontrib">
 	<description>Distributes the compiled, tested and packaged component.</description>
 
@@ -8,11 +9,12 @@
 	<import file="distribute.artifact.build.xml"/>
 	<import file="distribution.clearcase.build.xml"/>
 	<import file="distribution.git.build.xml"/>
+   <import file="distribution.maven.build.xml"/>
 	
-	<target name="distribute" depends="distribute.jar, distribute.component.properties" description="Distribute packaged Java component"/>
+	<target name="distribute" depends="distribute.jar, mvn-init, distribute.component.properties" description="Distribute packaged Java component"/>
 	
 	<target name="distribute.jar">
-		<echo>About to distribute ${component.packaged.file} component to ${component.distribution.path}.</echo>
+		 <echo>About to distribute ${component.packaged.file} component to ${component.distribution.path}.</echo>
 	    <distribute.artifact source.file="${project.distribution.dir}/${component.packaged.file}" destination.file="${distributed.java.archive.file}"/>
 	    <distribute.artifact source.file="${project.distribution.dir}/${component.packaged.file}" destination.file="${fitnesse.projects.dir}/${project.name}/${component.packaged.file}"/>
 	</target>
