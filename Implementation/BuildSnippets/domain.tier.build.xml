@@ -46,6 +46,12 @@
 		</fileset>
 	</path>
 	
+   <path id="ant.tasks.classpath">
+      <fileset dir="${ant.tasks.path}">
+         <include name="**/*.jar" />
+      </fileset>
+   </path>
+
 	<path id="cobertura.classpath">
 		<fileset dir="${cobertura.dir}">
 			<include name="cobertura-2.0.3.jar" />
