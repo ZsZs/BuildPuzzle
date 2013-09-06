@@ -105,7 +105,7 @@
 	<import file="compile.build.xml"/>
 	<import file="java.archive.build.xml"/>
 	<import file="component.test.build.xml"/>
-	<import file="web.archive.build.xml"/>
+	<import file="application.packaging.build.xml"/>
 	<import file="start-stop-tomcat.xml"/>
 	<import file="undeploy.build.xml"/>
 	<import file="deploy.build.xml"/>
@@ -122,8 +122,8 @@
 	<target name="install" depends="init, install.library.install" description="Installs app's dependent libraries." />
 	<target name="compile" depends="install, component.compiling.compile" description="Compiles sources." />
 	<target name="java.archive" depends="compile, component.packaging.package" description="Package java component." />
-	<target name="web.archive" depends="java.archive, application.packaging.package" description="Package web application." />
-	<target name="undeploy" depends="web.archive, application.undeploy.undeploy" description="Undeploy previous version." />
+	<target name="application.packaging" depends="java.archive, application.packaging.package" description="Package web application." />
+	<target name="undeploy" depends="application.packaging, application.undeploy.undeploy" description="Undeploy previous version." />
 	<target name="deploy" depends="undeploy, application.deploy.deploy" description="Deploy web application." />
 	<target name="server.availability" depends="deploy, server.availability.check" description="Checks if application is available on server." />
 	<target name="javascript.test" depends="server.availability, javascript.testing.test" description="Test JavaScrips." />
