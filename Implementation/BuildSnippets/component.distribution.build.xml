@@ -11,7 +11,7 @@
 	<import file="distribution.git.build.xml"/>
    <import file="distribution.maven.build.xml"/>
 	
-	<target name="distribute" depends="distribute.jar, mvn-init, distribute.component.properties" description="Distribute packaged Java component"/>
+	<target name="distribute" depends="distribute.jar, maven-deploy, distribute.component.properties" description="Distribute packaged Java component"/>
 	
 	<target name="distribute.jar">
 		 <echo>About to distribute ${component.packaged.file} component to ${component.distribution.path}.</echo>
