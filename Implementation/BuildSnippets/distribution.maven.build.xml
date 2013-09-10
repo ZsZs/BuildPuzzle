@@ -16,21 +16,32 @@
        <artifact:localRepository id="local.repository" path="${maven.repository.local}"/> 
        <artifact:pom file="pom.xml" id="component.pom"/>
 
-       <artifact:install file="${maven.deploy.jar.file}">
+       <artifact:install file="${distributed.java.archive.file}">
        	<localRepository refid="local.repository"/>
          <pom refid="component.pom"/>
        </artifact:install>
    </target>
 	
 	<target name="maven-deploy-remote">
-      <artifact:remoteRepository id="remote.repository" url="${maven.repository.remote}"/> 
-		
-		<artifact:deploy file="${maven.deploy.jar.file}">
-		   <remoteRepository refid="remote.repository">
-		   	<authentication username="${maven.repository.remote.user}" password="${maven.repository.remote.password}"/>
-		   </remoteRepository>
-	      <pom refid="component.pom"/>
-	   </artifact:deploy>
+		<artifact:mvn>
+		         <arg value="org.apache.maven.plugins:maven-deploy-plugin:2.6:deploy-file" />
+		         <arg value="-Durl=${maven.repository.remote}" />
+		         <arg value="-DrepositoryId=sonatype-nexus-snapshots" />
+		         <arg value="-DpomFile=${distributed.component.maven.file}" />
+		         <arg value="-Dfile=${distributed.java.archive.file}" />
+	     </artifact:mvn>
 	</target>
-   
+
+<!--   
+   <target name="maven-deploy-remote">
+      <artifact:remoteRepository id="remote.repository" url="${maven.repository.remote}"/> 
+      
+      <artifact:deploy file="${maven.deploy.jar.file}">
+         <remoteRepository refid="remote.repository">
+            <authentication username="${maven.repository.remote.user}" password="${maven.repository.remote.password}"/>
+         </remoteRepository>
+         <pom refid="component.pom"/>
+      </artifact:deploy>
+   </target>
+-->
 </project>
