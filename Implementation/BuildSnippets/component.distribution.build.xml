@@ -5,13 +5,14 @@
 
 	<property name="distributed.java.archive.file" value="${component.distribution.path}/${component.packaged.file}" />
 	<property name="distributed.component.properties.file" value="${component.distribution.path}/${component.properties.file}" />
+    <property name="distributed.component.maven.file" value="${component.distribution.path}/${component.maven.file}" />
 	
 	<import file="distribute.artifact.build.xml"/>
 	<import file="distribution.clearcase.build.xml"/>
 	<import file="distribution.git.build.xml"/>
    <import file="distribution.maven.build.xml"/>
 	
-	<target name="distribute" depends="distribute.jar, maven-deploy, distribute.component.properties" description="Distribute packaged Java component"/>
+	<target name="distribute" depends="distribute.jar, distribute.component.properties, distribute.component.pom, maven-deploy" description="Distribute packaged Java component"/>
 	
 	<target name="distribute.jar">
 		 <echo>About to distribute ${component.packaged.file} component to ${component.distribution.path}.</echo>
@@ -20,8 +21,13 @@
 	</target>
 
 	<target name="distribute.component.properties">
-		<echo>About to distribute ${component.properties.file} component properties to ${component.distribution.path}.</echo>
+		 <echo>About to distribute ${component.properties.file} component properties to ${component.distribution.path}.</echo>
 	    <distribute.artifact source.file="${project.build.dir}/${component.properties.file}" destination.file="${distributed.component.properties.file}"/>
 	</target>
+
+   <target name="distribute.component.pom">
+       <echo>About to distribute ${component.maven.file} component properties to ${component.distribution.path}.</echo>
+       <distribute.artifact source.file="${project.root}/${component.maven.file}" destination.file="${distributed.component.maven.file}"/>
+   </target>
 </project>
 
