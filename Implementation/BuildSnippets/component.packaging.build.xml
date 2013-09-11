@@ -26,6 +26,7 @@
 	        </manifest>		
 		</jar>
 		
-		<signjar jar="${project.distribution.dir}/${component.packaged.file}" alias="processpuzzle" storepass="secret"/>
+		<signjar jar="${project.distribution.dir}/${component.packaged.file}" alias="processpuzzle" storepass="36Zsuffa" keystore="${gpg.keystore}"/>
+		<!-- keytool -genkeypair -dname "cn=Zsolt Zsuffa, o=IT Codex, c=HU" -alias processpuzzle -keypass 36Zsuffa -storepass 36Zsuffa -validity 360 -->
 	</target>
 </project>
