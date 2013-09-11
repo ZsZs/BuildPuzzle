@@ -99,7 +99,7 @@
 	<!-- Domain Tier Build -->
 	<import file="init.build.xml"/>
 	<import file="compile.build.xml"/>
-	<import file="java.archive.build.xml"/>
+	<import file="component.packaging.build.xml"/>
 	<import file="component.test.build.xml"/>
 	<import file="analyse.build.xml"/>
 	<import file="component.distribution.build.xml"/>

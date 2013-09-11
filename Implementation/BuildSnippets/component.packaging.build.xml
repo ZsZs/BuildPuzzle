@@ -25,5 +25,7 @@
 	            <attribute name="Built-Date" value="${TODAY}"/>
 	        </manifest>		
 		</jar>
+		
+		<signjar jar="${project.distribution.dir}/${component.packaged.file}" alias="processpuzzle" storepass="secret"/>
 	</target>
 </project>
