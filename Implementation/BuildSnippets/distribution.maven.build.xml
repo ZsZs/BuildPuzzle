@@ -24,12 +24,12 @@
 	
 	<target name="maven-deploy-remote">
 		<artifact:mvn>
-		         <arg value="org.apache.maven.plugins:maven-deploy-plugin:2.6:deploy-file" />
-		         <arg value="-Durl=${maven.repository.remote}" />
-		         <arg value="-DrepositoryId=sonatype-nexus-snapshots" />
-		         <arg value="-DpomFile=${distributed.component.maven.file}" />
-		         <arg value="-Dfile=${distributed.java.archive.file}" />
-	     </artifact:mvn>
+		   <arg value="org.apache.maven.plugins:maven-deploy-plugin:2.6:deploy-file" />
+		   <arg value="-Durl=${maven.repository.remote}" />
+		   <arg value="-DrepositoryId=sonatype-nexus-snapshots" />
+		   <arg value="-DpomFile=${distributed.component.maven.file}" />
+		   <arg value="-Dfile=${distributed.java.archive.file}" />
+	   </artifact:mvn>
 	</target>
 
 <!--   
