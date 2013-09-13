@@ -103,7 +103,7 @@
 	<import file="init.build.xml"/>
 	<import file="install.library.build.xml"/>
 	<import file="compile.build.xml"/>
-	<import file="java.archive.build.xml"/>
+   <import file="component.packaging.build.xml"/>
 	<import file="component.test.build.xml"/>
 	<import file="application.packaging.build.xml"/>
 	<import file="start-stop-tomcat.xml"/>
