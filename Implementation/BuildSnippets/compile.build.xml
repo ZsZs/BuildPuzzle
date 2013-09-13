@@ -7,7 +7,7 @@
 	</target>
 	
 	<target name="compile-domainlogic-acceptancetest" depends="compile-domainlogic-unit-test">
-		<javac srcdir="${project.acceptancetests.dir}" destdir="${project.test.classes.dir}" debug="true" encoding="utf-8" includeantruntime="false">
+		<javac srcdir="${project.acceptancetests.dir}" destdir="${project.test.classes.dir}" debug="true" source="${ant.build.javac.source}" target="${ant.build.javac.target}" encoding="utf-8" includeantruntime="false">
 			<classpath>
 				<path refid="compile.test.classpath" />
 			</classpath>
@@ -21,7 +21,7 @@
 	</target>
 
 	<target name="compile-domainlogic-unit-test" depends="compile-domainlogic,cobertura-instrument">
-		<javac srcdir="${project.unittests.dir}" destdir="${project.test.classes.dir}" debug="true" encoding="utf-8" includeantruntime="false">
+		<javac srcdir="${project.unittests.dir}" destdir="${project.test.classes.dir}" debug="true" source="${ant.build.javac.source}" target="${ant.build.javac.target}" encoding="utf-8" includeantruntime="false">
 			<classpath refid="compile.test.classpath" />
 		</javac>
 		
@@ -75,7 +75,7 @@
 			</fileset>
 		</copy>
 		
-		<javac srcdir="${project.source.dir}" destdir="${project.production.classes.dir}" debug="true" debuglevel="vars,lines,source" encoding="utf-8" includeantruntime="false">
+		<javac srcdir="${project.source.dir}" destdir="${project.production.classes.dir}" source="${ant.build.javac.source}" target="${ant.build.javac.target}" debug="true" debuglevel="vars,lines,source" encoding="utf-8" includeantruntime="false">
 			<classpath refid="compile.production.classpath" />
 			<classpath refid="project.auxiliary.classpath" />
 		</javac>
