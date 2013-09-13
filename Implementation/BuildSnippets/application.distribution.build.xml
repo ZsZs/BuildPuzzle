@@ -2,6 +2,9 @@
 <project name="application.distribution" basedir="." default="distribute" xmlns:ac="antlib:net.sf.antcontrib">
 	<description>Distributes the compiled, tested and packaged application or component.</description>
 
+   <property name="distributed.java.archive.file" value="${component.distribution.path}/${component.packaged.file}" />
+   <property name="distributed.component.properties.file" value="${component.distribution.path}/${component.distributed.properties.file}" />
+   <property name="distributed.component.maven.file" value="${component.distribution.path}/${component.distributed.maven.file}" />
 	<property name="distributed.javascipt.file" value="${component.distribution.path}/${javasript.packaged.file}" />
    <property name="distributed.javascipt.file.minified" value="${component.distribution.path}/${javasript.packaged.file.minified}" />
    <property name="distributed.javascipt.library.file" value="${component.distribution.path}/${javasript.packaged.library.file}" />
@@ -11,8 +14,25 @@
 	<import file="distribute.artifact.build.xml"/>
 	<import file="distribution.clearcase.build.xml"/>
 	<import file="distribution.git.build.xml"/>
+   <import file="distribution.maven.build.xml"/>
 	
-	<target name="distribute" depends="distribute.javascript.source, distribute.javascript.source.minified, distribute.javascript.library, distribute.javascript.library.minified, distribute.war" description="Distribute compilled JavaScript and Web Archive"/>
+	<target name="distribute" depends="distribute.jar, distribute.component.properties, distribute.component.pom, maven-deploy, distribute.javascript.source, distribute.javascript.source.minified, distribute.javascript.library, distribute.javascript.library.minified, distribute.war" description="Distribute compilled JavaScript and Web Archive"/>
+	
+   <target name="distribute.jar">
+       <echo>About to distribute ${component.packaged.file} component to ${component.distribution.path}.</echo>
+       <distribute.artifact source.file="${project.distribution.dir}/${component.packaged.file}" destination.file="${distributed.java.archive.file}"/>
+       <distribute.artifact source.file="${project.distribution.dir}/${component.packaged.file}" destination.file="${fitnesse.projects.dir}/${project.name}/${component.packaged.file}"/>
+   </target>
+
+   <target name="distribute.component.properties">
+       <echo>About to distribute ${component.properties.file} component properties to ${component.distribution.path}.</echo>
+       <distribute.artifact source.file="${project.build.dir}/${component.properties.file}" destination.file="${distributed.component.properties.file}"/>
+   </target>
+
+   <target name="distribute.component.pom">
+       <echo>About to distribute ${component.maven.file} component properties to ${component.distribution.path}.</echo>
+       <distribute.artifact source.file="${project.root}/pom.xml" destination.file="${distributed.component.maven.file}"/>
+   </target>
 	
 	<target name="distribute.javascript.source" description="Distribute JavaScript with all available mechanism.">
 		<echo>About to distribute ${javasript.packaged.file} JavaScript to ${distributed.javascipt.file}.</echo>
