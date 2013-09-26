@@ -17,7 +17,6 @@
 		<artifact:localRepository id="local.repository" path="${maven.repository.local}" />
 		<artifact:pom file="pom.xml" id="component.pom" />
 
-      <echo>${distributed.java.archive.file}</echo>
 		<artifact:install file="${distributed.java.archive.file}">
 			<localRepository refid="local.repository" />
 			<pom refid="component.pom" />
@@ -25,7 +24,6 @@
 	</target>
 
 	<target name="maven-deploy-remote">
-		<echo>${distributed.java.archive.file}</echo>
 		<artifact:mvn>
 			<arg value="org.apache.maven.plugins:maven-deploy-plugin:2.6:deploy-file" />
 			<arg value="-Durl=${maven.repository.remote}" />
