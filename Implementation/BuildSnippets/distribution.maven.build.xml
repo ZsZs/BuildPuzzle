@@ -35,7 +35,7 @@
 	</target>
 
 	<!-- before this, update project version (both build.xml and pom.xml) from SNAPSHOT to RELEASE -->
-	<target name="maven-stage-remote" depends="maven-deploy-remote" description="deploy release version to Maven staging repository">
+	<target name="maven-stage-remote" description="deploy release version to Maven staging repository">
 		<artifact:mvn mavenHome="${env.M2_HOME}" fork="true">
 			<arg value="org.apache.maven.plugins:maven-gpg-plugin:1.4:sign-and-deploy-file" />
 			<arg value="-DretryFailedDeploymentCount=3" />
@@ -43,24 +43,10 @@
 			<arg value="-DrepositoryId=sonatype-nexus-staging" />
          <arg value="-DpomFile=${distributed.component.maven.file}" />
          <arg value="-Dfile=${distributed.java.archive.file}" />
-			<arg value="-Dclassifier=" />
-			<arg value="-Dpackaging=jar" />
+			<arg value="-Ppgp" />
          <arg value="-e" />
          <arg value="-X" />
 		</artifact:mvn>
 
 	</target>
-	
-	<!--   
-   <target name="maven-deploy-remote">
-      <artifact:remoteRepository id="remote.repository" url="${maven.repository.remote}"/> 
-      
-      <artifact:deploy file="${maven.deploy.jar.file}">
-         <remoteRepository refid="remote.repository">
-            <authentication username="${maven.repository.remote.user}" password="${maven.repository.remote.password}"/>
-         </remoteRepository>
-         <pom refid="component.pom"/>
-      </artifact:deploy>
-   </target>
--->
 </project>
