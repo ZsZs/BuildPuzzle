@@ -3,20 +3,19 @@
 	<description>Deploys compiled, packaged web application onto server.</description>
 	
 	<target name="deploy-properties">
-		<property name="source.file" value="${project.distribution.dir}/${application.packaged.file}" />
-		<property name="target.file" value="${appserver.deploy.dir}/${application.deployed.file}" />
+		<property name="source.file" location="${project.distribution.dir}/${application.packaged.file}" />
+		<property name="target.file" location="${appserver.deploy.dir}/${application.deployed.file}" />
 	</target>
 	
-	<target name="deploy" depends="wait-for-deploy">
+	<target name="deploy" depends="start-webapp">
 		<echo>Application ${application.url} is deployed.</echo>
 	</target>
-	
-	<target name="deploy-by-copy" depends="deploy-properties">
-		<echo>Deploying ${source.file} to ${target.file} URL: ${application.url}</echo>
-		<copy file="${source.file}" tofile="${target.file}" overwrite="true" />
+
+	<target name="tomcat-deploy" depends="deploy-properties">
+	  <deploy url="${appserver.url}/manager/text" username="${appserver.username}" password="${appserver.password}" path="/${application.name}" war="file:///${source.file}"/>                   
 	</target>
 	
-	<target name="wait-for-deploy" depends="deploy-by-copy">
+	<target name="wait-for-deploy" depends="tomcat-deploy">
 		<waitfor maxwait="30" maxwaitunit="second">
 			<and>
 				<available file="${target.dir}" type="dir"/>
@@ -25,4 +24,6 @@
 		</waitfor>
 	</target>
 	
-</project>
+	<target name="start-webapp" depends="wait-for-deploy">
+	   <catalina-start url="${appserver.url}/manager/text" username="${appserver.username}" password="${appserver.password}" path="/${application.name}"/>
+	</target></project>

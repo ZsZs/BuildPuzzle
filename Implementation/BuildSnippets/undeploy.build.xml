@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project name="application.undeploy" basedir="." default="undeploy">
 	<description>Undeploys web application from server.</description>
-	
+			
 	<target name="undeploy" depends="wait-for-undeploy">
 		<echo>Application ${application.url} is undeployed.</echo>
 	</target>
@@ -11,19 +11,15 @@
 		<property name="target.dir" value="${appserver.deploy.dir}/${application.name}" />
 	</target>
 	
-	<target name="undeploy-by-delete" depends="undeploy-properties">
-		<echo>Undeploying ${target.file} from URL: ${application.url}</echo>
-		<delete file="${target.file}" />
-      <waitfor maxwait="30" maxwaitunit="second">
-         <and>
-            <not><http url="${application.url}" /></not>
-         </and>
-      </waitfor>
-		<sleep seconds="5"/>
-		<delete dir="${target.dir}" />
+	<target name="stop-webapp" depends="undeploy-properties">
+	   <catalina-stop url="${appserver.url}/manager/text" username="${appserver.username}" password="${appserver.password}" path="/${application.name}" failonerror="false"/>
 	</target>
-
-	<target name="wait-for-undeploy" depends="undeploy-by-delete">
+		
+	<target name="tomcat-undeploy" depends="stop-webapp">
+	   <undeploy url="${appserver.url}/manager/text" username="${appserver.username}" password="${appserver.password}" path="/${application.name}" failOnError="false"/>
+	</target>
+		
+	<target name="wait-for-undeploy" depends="tomcat-undeploy">
 		<waitfor maxwait="30" maxwaitunit="second">
 			<and>
 				<not><available file="${target.dir}" type="dir"/></not>

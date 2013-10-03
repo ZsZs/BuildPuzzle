@@ -76,7 +76,7 @@
 		</fileset>
 	</path>
 	
-   <path id="tomcat.classpath">
+   <path id="catalina-ant-classpath">
       <fileset dir="${appserver.dir}">
          <include name="bin/tomcat-juli.jar" />
          <include name="lib/catalina-ant.jar" />
@@ -110,7 +110,9 @@
 	<taskdef classpathref="cobertura.classpath" resource="tasks.properties" />
 	<taskdef name="findbugs" classpathref="findbugs.classpath" classname="edu.umd.cs.findbugs.anttask.FindBugsTask" />
 	<taskdef name="pmd" classpathref="pmd.classpath" classname="net.sourceforge.pmd.ant.PMDTask" />
-   <taskdef resource="org/apache/catalina/ant/catalina.tasks" classpathref="tomcat.classpath" />
+   <taskdef resource="org/apache/catalina/ant/catalina.tasks" classpathref="catalina-ant-classpath" />
+	<taskdef name="catalina-start" classname="org.apache.catalina.ant.StartTask" classpathref="catalina-ant-classpath"/>
+   <taskdef name="catalina-stop" classname="org.apache.catalina.ant.StopTask" classpathref="catalina-ant-classpath"/>
 
 
 	<!-- Web Tier Build -->
