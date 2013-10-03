@@ -76,6 +76,18 @@
 		</fileset>
 	</path>
 	
+   <path id="tomcat.classpath">
+      <fileset dir="${appserver.dir}">
+         <include name="bin/tomcat-juli.jar" />
+         <include name="lib/catalina-ant.jar" />
+         <include name="lib/jasper.jar" />
+         <include name="lib/servlet-api.jar" />
+         <include name="lib/tomcat-coyote.jar" />
+         <include name="lib/tomcat-util.jar" />
+         <exclude name="**/*.copyarea.db" />
+      </fileset>
+   </path>
+   
    <path id="yui.compressor.classpath">
       <fileset dir="${yui.compressor.root.dir}">
          <include name="build/yuicompressor-2.4.7.jar" />
@@ -98,6 +110,8 @@
 	<taskdef classpathref="cobertura.classpath" resource="tasks.properties" />
 	<taskdef name="findbugs" classpathref="findbugs.classpath" classname="edu.umd.cs.findbugs.anttask.FindBugsTask" />
 	<taskdef name="pmd" classpathref="pmd.classpath" classname="net.sourceforge.pmd.ant.PMDTask" />
+   <taskdef resource="org/apache/catalina/ant/catalina.tasks" classpathref="tomcat.classpath" />
+
 
 	<!-- Web Tier Build -->
 	<import file="init.build.xml"/>
