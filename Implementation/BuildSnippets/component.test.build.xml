@@ -24,7 +24,7 @@
 			<arg value="${fitnesse.testresults.dir}"/>
 				
 			<arg value="-port"/>
-			<arg value="9004"/>
+			<arg value="${fitnesse.port}"/>
 				
 			<arg value="-junitXmlOutput"/>
 			<arg value="${fitnesse.testresults.file}"/>
@@ -38,22 +38,11 @@
 				<path refid="compile.test.classpath" />
 			</classpath>
 		</java>
-			
-		<copy todir="${fitnesse.reports.dir}">
-		   <fileset dir="${fitnesse.testresults.dir}/${fitnesse.testpage}">
-		    	<include name="**/*.html"/>
-		        <include name="**/*.gif"/>
-				<include name="**/*.css"/>
-	        	<include name="**/*.js"/>
-			</fileset>
-			<mapper type="flatten"/>
-		</copy>
 -->
 		<!-- Relies on FitNesse REST services -->
-		<echo>Output: ${fitnesse.testresults.file}</echo>
 		<java dir="${fitnesse.root.dir}" jar="${fitnesse.root.dir}/fitnesse-standalone.jar" output="${fitnesse.testresults.file}" fork="true" resultproperty="FitRegressionResult" >
 			<arg value="-c"/>
-			<arg value="${fitnesse.testpage}?suite&amp;format=html"/>
+			<arg value="${fitnesse.testpage}?suite&amp;format=xml"/>
          <arg value="-p"/>
          <arg value="${fitnesse.port}"/>
 			<arg value="-l"/>
@@ -64,7 +53,20 @@
 		<condition property="fit-failures">
 			<equals arg1="${FitRegressionResult}" arg2="0" />
 		</condition>
+		
 		<fail message="${FitRegressionResult} Fitnesse test(s) failed."	unless="fit-failures" />
+<!--		
+      <copy todir="${fitnesse.reports.dir}">
+         <fileset dir="${fitnesse.testresults.dir}/${fitnesse.testpage}">
+            <include name="**/*.xml"/>
+            <include name="**/*.html"/>
+            <include name="**/*.gif"/>
+            <include name="**/*.css"/>
+            <include name="**/*.js"/>
+         </fileset>
+         <mapper type="flatten"/>
+      </copy>
+-->
 	</target>
 	
 	<target name="unit-test">		
