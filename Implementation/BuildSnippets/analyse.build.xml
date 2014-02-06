@@ -68,7 +68,26 @@
 	</target>
 
 	<target name="fitnesse-xslt">
-		<xslt basedir="${fitnesse.testresults.dir}/${fitnesse.testpage}" destdir="${fitnesse.reports.dir}/html" extension=".html" style="${fitnesse.xslt.path}/FitNesse-TestSuite-html.xslt" />
+		<copy file="${fitnesse.xslt.path}/Fitnesse-TestPage.css" todir="${fitnesse.reports.dir}/html" /> 
+		<xslt basedir="${fitnesse.testresults.dir}" 
+		      destdir="${fitnesse.reports.dir}/html" 
+			   extension=".html" 
+			   style="${fitnesse.xslt.path}/FitNesse-TestSuite-html.xslt"
+		      classpath="${ant.libraries.path}/Saxon/saxon9he.jar"
+		      processor="trax"
+			   includes="${fitnesse.testpage}/*.xml"
+		      excludesfile="${fitnesse.testresults.dir}/fitnesse-test-results.xml">
+	   </xslt>
+		
+      <xslt basedir="${fitnesse.testresults.dir}" 
+            destdir="${fitnesse.reports.dir}/html" 
+            extension=".html" 
+            style="${fitnesse.xslt.path}/FitNesse-TestPage-html.xslt"
+            classpath="${ant.libraries.path}/Saxon/saxon9he.jar"
+            processor="trax"
+            includes="${fitnesse.testpage}.*Test*/*.xml"
+            excludesfile="${fitnesse.testresults.dir}/fitnesse-test-results.xml">
+      </xslt>
 	</target>
 
 </project>
