@@ -12,7 +12,7 @@
       <property name="ivy.dep.file" value="Build/ivy.xml"/>
    	
    	<ivy:configure file="Build/ivysettings.xml" />
-      <ivy:retrieve />
+      <ivy:resolve file="${ivy.dep.file}" conf="test, production"/>
    </target>
 </project>
    
