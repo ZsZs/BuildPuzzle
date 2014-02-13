@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE project>
-<project name="Build Domain Tier" basedir="." default="distribute">
+<project name="Build Domain Tier" basedir="." default="distribute" xmlns:ivy="antlib:org.apache.ivy.ant">
 
 	<property environment="env" />
    <property name="component.distribution.dir" value="${distribution.base.dir}" />
@@ -80,7 +80,11 @@
 			<include name="lib/**/*.jar" />
 		</fileset>
 	</path>
+
+   <ivy:cachepath pathid="processpuzzle.development.classpath" conf="development" file="Build/ivy.xml" />
+   <ivy:cachepath pathid="processpuzzle.production.classpath" conf="production" file="Build/ivy.xml" />
 	
+<!--   	
 	<path id="compile.production.classpath">
 		<path refid="processpuzzle.production.classpath"/>
 		<path refid="processpuzzle.development.classpath"/>
@@ -91,7 +95,7 @@
 		<path refid="compile.production.classpath"/>
 		<pathelement location="${project.production.classes.dir}" />
 	</path>
-
+-->
 	<taskdef classpathref="cobertura.classpath" resource="tasks.properties" />
 	<taskdef name="findbugs" classpathref="findbugs.classpath" classname="edu.umd.cs.findbugs.anttask.FindBugsTask" />
 	<taskdef name="pmd" classpathref="pmd.classpath" classname="net.sourceforge.pmd.ant.PMDTask" />
