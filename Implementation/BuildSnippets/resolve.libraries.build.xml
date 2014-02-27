@@ -9,10 +9,8 @@
    <target name="resolve-ivy">
       <echo>About to fetch dependent libraries.</echo>
    	<setproxy proxyhost="${proxy.host}" proxyport="${proxy.port}"/>
-      <property name="ivy.dep.file" value="Build/ivy.xml"/>
    	
-   	<ivy:configure file="Build/ivysettings.xml" />
-      <ivy:resolve file="${ivy.dep.file}" conf="test, production"/>
+      <ivy:resolve file="${ivy.dep.file}" conf="development, production"/>
    </target>
 </project>
    
