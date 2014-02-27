@@ -11,6 +11,7 @@
    	<setproxy proxyhost="${proxy.host}" proxyport="${proxy.port}"/>
    	
       <ivy:resolve file="${ivy.dep.file}" conf="development, production"/>
+   	<ivy:report todir="${ivy.reports.dir}"/>
    </target>
 </project>
    
