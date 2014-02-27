@@ -11,10 +11,10 @@
 	<target name="ivy-distribute" depends="ivy-distribute-local, ivy-distribute-public"></target>
 
 	<target name="ivy-distribute-local" unless="compile.classpath">
-		<ivy:publish artifactspattern="${project.distribution.dir}/[artifact]-${component.version}.[ext]" resolver="local" pubrevision="${component.version}" pubdate="${now}" status="integration" forcedeliver="true" />
+		<ivy:publish artifactspattern="${project.distribution.dir}/[artifact]-${component.version}.[ext]" resolver="local" pubrevision="${component.version}" pubdate="${now}" status="integration" forcedeliver="true" overwrite="true" />
 	</target>
 
 	<target name="ivy-distribute-public">
-		<ivy:publish artifactspattern="${project.distribution.dir}/[artifact]-${component.version}.[ext]" resolver="shared" pubrevision="${component.version}" status="release" />
+		<ivy:publish artifactspattern="${project.distribution.dir}/[artifact]-${component.version}.[ext]" resolver="shared" pubrevision="${component.version}" status="release" overwrite="true" />
 	</target>
 </project>
