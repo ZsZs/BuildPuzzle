@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE project>
+<project name="distribution.ivy" basedir="." xmlns:ivy="antlib:org.apache.ivy.ant">
+
+	<property name="maven.deploy.jar.file" value="${project.distribution.dir}/${component.packaged.file}" />
+	<property environment="env" />
+	<tstamp>
+		<format property="now" pattern="yyyyMMddHHmmss" />
+	</tstamp>
+	
+	<target name="ivy-distribute" depends="ivy-distribute-local, ivy-distribute-public"></target>
+
+	<target name="ivy-distribute-local" unless="compile.classpath">
+		<ivy:publish artifactspattern="${project.distribution.dir}/[artifact]-${component.version}.[ext]" resolver="local" pubrevision="${component.version}" pubdate="${now}" status="integration" forcedeliver="true" />
+	</target>
+
+	<target name="ivy-distribute-public">
+		<ivy:publish artifactspattern="${project.distribution.dir}/[artifact]-${component.version}.[ext]" resolver="shared" pubrevision="${component.version}" status="release" />
+	</target>
+</project>

@@ -6,7 +6,7 @@
 	<property name="maven.deploy.jar.file" value="${project.distribution.dir}/${component.packaged.file}" />
    <property environment="env"/>       
 
-	<target name="maven-deploy" depends="maven-deploy-local, maven-deploy-remote"></target>
+	<target name="maven-distribute" depends="maven-deploy-local, maven-deploy-remote"></target>
 
 	<target name="maven-deploy-local" unless="compile.classpath" xmlns:artifact="urn:maven-artifact-ant">
 		<condition property="maven.repository.local" value="${maven.repository.local}" else="${user.home}/.m2/repository">
