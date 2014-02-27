@@ -81,24 +81,26 @@
 		</fileset>
 	</path>
 
-   <ivy:cachepath pathid="processpuzzle.development.classpath" conf="development" file="Build/ivy.xml" />
+	<ivy:configure file="Build/ivysettings.xml" />
+	<ivy:cachepath pathid="processpuzzle.development.classpath" conf="development" file="Build/ivy.xml" />
    <ivy:cachepath pathid="processpuzzle.production.classpath" conf="production" file="Build/ivy.xml" />
 	
-<!--   	
 	<path id="compile.production.classpath">
 		<path refid="processpuzzle.production.classpath"/>
-		<path refid="processpuzzle.development.classpath"/>
 		<path refid="project.auxiliary.classpath"/>
 	</path>
 	
 	<path id="compile.test.classpath">
 		<path refid="compile.production.classpath"/>
+		<path refid="processpuzzle.development.classpath"/>
 		<pathelement location="${project.production.classes.dir}" />
 	</path>
--->
+
 	<taskdef classpathref="cobertura.classpath" resource="tasks.properties" />
 	<taskdef name="findbugs" classpathref="findbugs.classpath" classname="edu.umd.cs.findbugs.anttask.FindBugsTask" />
 	<taskdef name="pmd" classpathref="pmd.classpath" classname="net.sourceforge.pmd.ant.PMDTask" />
+	<taskdef classpath="${ant.tasks.path}/ant-contrib-1.0b3.jar" resource="net/sf/antcontrib/antlib.xml" />
+
 
 	<!-- Domain Tier Build -->
 	<import file="init.build.xml"/>
