@@ -82,8 +82,8 @@
 	</path>
 
 	<ivy:configure file="Build/ivysettings.xml" />
-	<ivy:cachepath pathid="processpuzzle.development.classpath" conf="development" file="Build/ivy.xml" />
-   <ivy:cachepath pathid="processpuzzle.production.classpath" conf="production" file="Build/ivy.xml" />
+	<ivy:cachepath pathid="processpuzzle.development.classpath" conf="development" />
+   <ivy:cachepath pathid="processpuzzle.production.classpath" conf="production" />
 	
 	<path id="compile.production.classpath">
 		<path refid="processpuzzle.production.classpath"/>
