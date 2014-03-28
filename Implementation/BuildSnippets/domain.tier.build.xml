@@ -107,6 +107,7 @@
    <import file="resolve.libraries.build.xml"/>
 	<import file="compile.build.xml"/>
 	<import file="component.packaging.build.xml"/>
+	<import file="component.sign.build.xml"/>
 	<import file="component.test.build.xml"/>
 	<import file="analyse.build.xml"/>
 	<import file="component.distribution.build.xml"/>
@@ -118,6 +119,9 @@
 	<target name="compile" depends="resolve, component.compiling.compile" description="Compiles sources." />
 	<target name="java.archive" depends="compile, component.packaging.package" description="Package component." />
 	<target name="test" depends="java.archive, component.testing.test" description="Test component." />
+<!--
+	<target name="java.sign" depends="test, component.sign.sign" description="Sign component." />
+-->
 	<target name="analyse" depends="test, component.analysis.analyse" description="Analyse component." />
 	<target name="distribute" depends="analyse, component.distribution.distribute" description="Distribute packaged component." />
 
