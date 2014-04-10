@@ -2,7 +2,7 @@
 <project name="Build Web Tier" basedir="." default="all">
 
 	<property environment="env" />
-    <property name="component.distribution.dir" value="${distribution.base.dir}" />
+   <property name="component.distribution.dir" value="${distribution.base.dir}" />
 	<property name="component.distribution.path" value="${distribution.base.path}" />
 	<property name="component.packaged.file" value="${component.name}-${component.version}.${component.package.extension}" />
 	<property name="application.packaged.file" value="${application.name}-${component.version}.${application.package.extension}" />
@@ -21,6 +21,12 @@
 		<exclude name="**/*.copyarea.db" />
 	</patternset>
 	
+	<path id="project.auxiliary.classpath">
+		<fileset dir="${project.library.dir}">
+			<include name="**/*.jar" />
+		</fileset>
+	</path>
+
 	<path id="processpuzzle.development.classpath">
 		<fileset dir="${common.dependent.library.path}/DevelopmentLibraries">
 			<include name="**/*.jar" />
@@ -43,7 +49,7 @@
 	</path>
 	
 	<path id="cobertura.classpath">
-		<fileset dir="${cobertura.dir}">
+		<fileset dir="${cobertura.root.dir}">
 			<include name="cobertura-2.0.3.jar" />
 			<include name="lib/**/*.jar" />
 			<exclude name="**/*.copyarea.db" />
@@ -98,7 +104,6 @@
    
 	<path id="compile.production.classpath">
 		<path refid="processpuzzle.production.classpath"/>
-		<path refid="processpuzzle.development.classpath"/>
 		<path refid="project.auxiliary.classpath"/>
 	</path>
 	
@@ -118,6 +123,7 @@
 	<!-- Web Tier Build -->
 	<import file="init.build.xml"/>
 	<import file="install.library.build.xml"/>
+   <import file="resolve.libraries.build.xml"/>
 	<import file="compile.build.xml"/>
    <import file="component.packaging.build.xml"/>
 	<import file="component.test.build.xml"/>
@@ -135,7 +141,8 @@
 	<target name="all" depends="distribute" />
 		
 	<target name="init" depends="component.initializing.init" description="Initializes build environment." />
-	<target name="install" depends="init, install.library.install" description="Installs app's dependent libraries." />
+   <target name="resolve" depends="init, component.resolve.resolve" description="Fetches dependent libraries." />
+	<target name="install" depends="resolve, install.library.install" description="Installs app's dependent libraries." />
 	<target name="compile" depends="install, component.compiling.compile" description="Compiles sources." />
 	<target name="java.archive" depends="compile, component.packaging.package" description="Package java component." />
 	<target name="application.packaging" depends="java.archive, application.packaging.package" description="Package web application." />
