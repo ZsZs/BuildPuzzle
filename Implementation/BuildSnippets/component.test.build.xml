@@ -33,7 +33,7 @@
 				<pathelement location="${fitnesse.root.dir}/fitlibrary.jar" />
 				<pathelement location="${fitnesse.root.dir}/fitnesse.jar" />
 				<pathelement location="${cobertura.instrumented.dir}" />
-				<pathelement location="${cobertura.dir}/cobertura.jar" />
+				<pathelement location="${cobertura.root.dir}/cobertura.jar" />
 				<pathelement location="${project.test.classes.dir}"/>
 				<path refid="compile.test.classpath" />
 			</classpath>
