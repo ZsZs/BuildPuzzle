@@ -113,6 +113,7 @@
 	
 	<path id="compile.test.classpath">
 		<path refid="compile.production.classpath"/>
+		<path refid="processpuzzle.development.classpath"/>
 		<pathelement location="${project.production.classes.dir}" />
 	</path>
 
