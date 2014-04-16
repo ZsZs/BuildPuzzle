@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project name="Build Web Tier" basedir="." default="all">
+<project name="Build Web Tier" basedir="." default="all" xmlns:ivy="antlib:org.apache.ivy.ant">
 
 	<property environment="env" />
    <property name="component.distribution.dir" value="${distribution.base.dir}" />
@@ -102,6 +102,10 @@
       </fileset>
    </path>
    
+	<ivy:configure file="Build/ivysettings.xml" />
+	<ivy:cachepath pathid="processpuzzle.development.classpath" conf="development" />
+   <ivy:cachepath pathid="processpuzzle.production.classpath" conf="production" />
+	
 	<path id="compile.production.classpath">
 		<path refid="processpuzzle.production.classpath"/>
 		<path refid="project.auxiliary.classpath"/>
