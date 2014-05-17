@@ -8,9 +8,9 @@
 	
 	<target name="fitnesse-test" description="Run fitnesse acceptance tests." depends="unit-test">
 		<echo>Fitnesse dir: ${fitnesse.root.dir}, Test results directory: ${fitnesse.testresults.dir}, Test page: ${fitnesse.testpage}</echo>
-		
 		<delete dir="${fitnesse.testresults.dir}/${fitnesse.testpage}"/>
 		
+		<!--     
 		<java dir="${fitnesse.root.dir}" classname="fitlibrary.batch.FitLibraryRunner" fork="true" resultproperty="FitRegressionResult" >
 			<sysproperty key="net.sourceforge.cobertura.datafile"	value="${cobertura.data.file}" />
 			
@@ -24,7 +24,7 @@
 			<arg value="${fitnesse.testresults.dir}"/>
 				
 			<arg value="-port"/>
-			<arg value="9004"/>
+			<arg value="${fitnesse.port}"/>
 				
 			<arg value="-junitXmlOutput"/>
 			<arg value="${fitnesse.testresults.file}"/>
@@ -33,38 +33,40 @@
 				<pathelement location="${fitnesse.root.dir}/fitlibrary.jar" />
 				<pathelement location="${fitnesse.root.dir}/fitnesse.jar" />
 				<pathelement location="${cobertura.instrumented.dir}" />
-				<pathelement location="${cobertura.dir}/cobertura.jar" />
+				<pathelement location="${cobertura.root.dir}/cobertura.jar" />
 				<pathelement location="${project.test.classes.dir}"/>
 				<path refid="compile.test.classpath" />
 			</classpath>
 		</java>
-			
-		<copy todir="${fitnesse.reports.dir}">
-		   <fileset dir="${fitnesse.testresults.dir}/${fitnesse.testpage}">
-		    	<include name="**/*.html"/>
-		        <include name="**/*.gif"/>
-				<include name="**/*.css"/>
-	        	<include name="**/*.js"/>
-			</fileset>
-			<mapper type="flatten"/>
-		</copy>
-
-		<!-- Relies on FitNesse REST services
-		<java dir="${fitnesse.root.dir}" jar="${fitnesse.root.dir}/fitnesse.jar" output="${component.distribution.dir}/${fitnesse.testresults.file}" fork="true" resultproperty="FitRegressionResult" >
+-->
+		<!-- Relies on FitNesse REST services -->
+		<java dir="${fitnesse.root.dir}" jar="${fitnesse.root.dir}/fitnesse-standalone.jar" output="${fitnesse.testresults.file}" fork="true" resultproperty="FitRegressionResult" >
 			<arg value="-c"/>
-			<arg value='"${fitnesse.testpage}?suite&amp;format=xml"'/>
+			<arg value="${fitnesse.testpage}?suite&amp;format=xml"/>
+         <arg value="-p"/>
+         <arg value="${fitnesse.port}"/>
 			<arg value="-l"/>
 			<arg value="${fitnesse.root.dir}/Logs"/>
 		</java>
-		-->
 
 		<!-- fail if any fit test errors -->
-		<!--
 		<condition property="fit-failures">
 			<equals arg1="${FitRegressionResult}" arg2="0" />
 		</condition>
+		
 		<fail message="${FitRegressionResult} Fitnesse test(s) failed."	unless="fit-failures" />
-		-->
+<!--		
+      <copy todir="${fitnesse.reports.dir}">
+         <fileset dir="${fitnesse.testresults.dir}/${fitnesse.testpage}">
+            <include name="**/*.xml"/>
+            <include name="**/*.html"/>
+            <include name="**/*.gif"/>
+            <include name="**/*.css"/>
+            <include name="**/*.js"/>
+         </fileset>
+         <mapper type="flatten"/>
+      </copy>
+-->
 	</target>
 	
 	<target name="unit-test">		

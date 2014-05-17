@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project name="artifact.distribution" basedir="." xmlns:ac="antlib:net.sf.antcontrib">
-
+	
 	<macrodef name="distribute.artifact">
 		<attribute name="source.file"/>
 		<attribute name="destination.file"/>

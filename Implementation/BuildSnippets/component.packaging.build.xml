@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project name="component.packaging" basedir="." default="package">
-	<description>Packages compiled, tested application or component.</description>
+	<description>Package compiled class files.</description>
 	
 	<target name="package">
 		<echo>About to package ${component.packaged.file} component.</echo>
@@ -25,8 +25,5 @@
 	            <attribute name="Built-Date" value="${TODAY}"/>
 	        </manifest>		
 		</jar>
-		
-		<signjar jar="${project.distribution.dir}/${component.packaged.file}" alias="processpuzzle" storepass="36Zsuffa" keystore="${gpg.keystore}"/>
-		<!-- keytool -genkeypair -dname "cn=Zsolt Zsuffa, o=IT Codex, c=HU" -alias processpuzzle -keypass 36Zsuffa -storepass 36Zsuffa -validity 360 -->
 	</target>
 </project>

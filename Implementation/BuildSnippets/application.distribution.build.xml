@@ -16,7 +16,7 @@
 	<import file="distribution.git.build.xml"/>
    <import file="distribution.maven.build.xml"/>
 	
-	<target name="distribute" depends="distribute.jar, distribute.component.properties, distribute.component.pom, maven-deploy, distribute.javascript.source, distribute.javascript.source.minified, distribute.javascript.library, distribute.javascript.library.minified, distribute.war" description="Distribute compilled JavaScript and Web Archive"/>
+	<target name="distribute" depends="distribute.jar, distribute.component.properties, distribute.component.pom, maven-distribute, distribute.javascript.source, distribute.javascript.source.minified, distribute.javascript.library, distribute.javascript.library.minified, distribute.war" description="Distribute compilled JavaScript and Web Archive"/>
 	
    <target name="distribute.jar">
        <echo>About to distribute ${component.packaged.file} component to ${component.distribution.path}.</echo>

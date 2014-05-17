@@ -74,10 +74,14 @@
 				<include name="*.properties" />
 			</fileset>
 		</copy>
+
+	   <echo>Java/JVM version: ${ant.java.version}</echo> 
+	   <echo>Java/JVM detail version: ${java.version}</echo> 
 		
-		<javac srcdir="${project.source.dir}" destdir="${project.production.classes.dir}" source="${ant.build.javac.source}" target="${ant.build.javac.target}" debug="true" debuglevel="vars,lines,source" encoding="utf-8" includeantruntime="false">
+		<javac srcdir="${project.source.dir}" destdir="${project.production.classes.dir}" source="${ant.build.javac.source}" target="${ant.build.javac.target}" debug="true" debuglevel="vars,lines,source" encoding="utf-8" includeantruntime="false" fork="true">
 			<classpath refid="compile.production.classpath" />
 			<classpath refid="project.auxiliary.classpath" />
+			<compilerarg value="-XDignore.symbol.file" />
 		</javac>
 		
 		<copy todir="${project.production.classes.dir}">

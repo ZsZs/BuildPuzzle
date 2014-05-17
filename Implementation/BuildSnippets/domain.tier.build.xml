@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE project>
-<project name="Build Domain Tier" basedir="." default="distribute">
+<project name="Build Domain Tier" basedir="." default="distribute" xmlns:ivy="antlib:org.apache.ivy.ant">
 
 	<property environment="env" />
-    <property name="component.distribution.dir" value="${distribution.base.dir}" />
+   <property name="component.distribution.dir" value="${distribution.base.dir}" />
 	<property name="component.distribution.path" value="${distribution.base.path}" />
 	<property name="component.packaged.file" value="${component.name}-${component.version}.${component.package.extension}" />
 
@@ -80,26 +80,34 @@
 			<include name="lib/**/*.jar" />
 		</fileset>
 	</path>
+
+	<ivy:configure file="Build/ivysettings.xml" />
+	<ivy:cachepath pathid="processpuzzle.development.classpath" conf="development" />
+   <ivy:cachepath pathid="processpuzzle.production.classpath" conf="production" />
 	
 	<path id="compile.production.classpath">
 		<path refid="processpuzzle.production.classpath"/>
-		<path refid="processpuzzle.development.classpath"/>
 		<path refid="project.auxiliary.classpath"/>
 	</path>
 	
 	<path id="compile.test.classpath">
 		<path refid="compile.production.classpath"/>
+		<path refid="processpuzzle.development.classpath"/>
 		<pathelement location="${project.production.classes.dir}" />
 	</path>
 
 	<taskdef classpathref="cobertura.classpath" resource="tasks.properties" />
 	<taskdef name="findbugs" classpathref="findbugs.classpath" classname="edu.umd.cs.findbugs.anttask.FindBugsTask" />
 	<taskdef name="pmd" classpathref="pmd.classpath" classname="net.sourceforge.pmd.ant.PMDTask" />
+	<taskdef classpath="${ant.tasks.path}/ant-contrib-1.0b3.jar" resource="net/sf/antcontrib/antlib.xml" />
+
 
 	<!-- Domain Tier Build -->
 	<import file="init.build.xml"/>
+   <import file="resolve.libraries.build.xml"/>
 	<import file="compile.build.xml"/>
 	<import file="component.packaging.build.xml"/>
+	<import file="component.sign.build.xml"/>
 	<import file="component.test.build.xml"/>
 	<import file="analyse.build.xml"/>
 	<import file="component.distribution.build.xml"/>
@@ -107,9 +115,13 @@
 	<target name="all" depends="distribute" />
 	
 	<target name="init" depends="component.initializing.init" description="Initializes build environment." />
-	<target name="compile" depends="init, component.compiling.compile" description="Compiles sources." />
+   <target name="resolve" depends="init, component.resolve.resolve" description="Fetches dependent libraries." />
+	<target name="compile" depends="resolve, component.compiling.compile" description="Compiles sources." />
 	<target name="java.archive" depends="compile, component.packaging.package" description="Package component." />
 	<target name="test" depends="java.archive, component.testing.test" description="Test component." />
+<!--
+	<target name="java.sign" depends="test, component.sign.sign" description="Sign component." />
+-->
 	<target name="analyse" depends="test, component.analysis.analyse" description="Analyse component." />
 	<target name="distribute" depends="analyse, component.distribution.distribute" description="Distribute packaged component." />
 

@@ -10,9 +10,10 @@
 	<import file="distribute.artifact.build.xml"/>
 	<import file="distribution.clearcase.build.xml"/>
 	<import file="distribution.git.build.xml"/>
+   <import file="distribution.ivy.build.xml"/>
    <import file="distribution.maven.build.xml"/>
 	
-	<target name="distribute" depends="distribute.jar, distribute.component.properties, distribute.component.pom, maven-deploy" description="Distribute packaged Java component"/>
+	<target name="distribute" depends="distribute.jar, distribute.component.properties, distribute.component.pom, ivy-distribute, maven-distribute" description="Distribute packaged Java component"/>
 	
 	<target name="distribute.jar">
 		 <echo>About to distribute ${component.packaged.file} component to ${component.distribution.path}.</echo>

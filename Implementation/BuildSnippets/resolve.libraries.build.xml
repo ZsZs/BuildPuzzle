@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="component.resolve" basedir="." default="resolve" xmlns:ivy="antlib:org.apache.ivy.ant">
+   <description>Resolves dependent libraries.</description>
+   
+   <target name="resolve" depends="resolve-ivy">
+      <echo>Fetching of dependent libraries is finished.</echo>
+   </target>
+   
+   <target name="resolve-ivy">
+      <echo>About to fetch dependent libraries.</echo>
+   	<setproxy proxyhost="${proxy.host}" proxyport="${proxy.port}"/>
+   	
+      <ivy:resolve file="${ivy.dep.file}" conf="development, production"/>
+   	<ivy:report todir="${ivy.reports.dir}"/>
+   </target>
+</project>
+   

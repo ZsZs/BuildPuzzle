@@ -68,11 +68,26 @@
 	</target>
 
 	<target name="fitnesse-xslt">
-		<echo>Transforming FitNesse test results to HTML is temporary omitted, while FitNesse Rest response contains none XML content too.</echo>
-		<!--
-		<xslt basedir="${component.distribution.dir}/${fitnesse.testresults.dir}" destdir="${project.distribution.dir}" extension=".html" style="${fitnesse.xslt.dir}/fitnesse-html.xsl" />
-		<xslt basedir="${component.distribution.dir}/${fitnesse.testresults.dir}" destdir="${project.distribution.dir}" extension=".xml" style="${fitnesse.xslt.dir}/fitnesse-junit.xsl" />
-		-->
+		<copy file="${fitnesse.xslt.path}/Fitnesse-TestPage.css" todir="${fitnesse.reports.dir}/html" /> 
+		<xslt basedir="${fitnesse.testresults.dir}" 
+		      destdir="${fitnesse.reports.dir}/html" 
+			   extension=".html" 
+			   style="${fitnesse.xslt.path}/FitNesse-TestSuite-html.xslt"
+		      classpath="${ant.libraries.path}/Saxon/saxon9he.jar"
+		      processor="trax"
+			   includes="${fitnesse.testpage}/*.xml"
+		      excludesfile="${fitnesse.testresults.dir}/fitnesse-test-results.xml">
+	   </xslt>
+		
+      <xslt basedir="${fitnesse.testresults.dir}" 
+            destdir="${fitnesse.reports.dir}/html" 
+            extension=".html" 
+            style="${fitnesse.xslt.path}/FitNesse-TestPage-html.xslt"
+            classpath="${ant.libraries.path}/Saxon/saxon9he.jar"
+            processor="trax"
+            includes="${fitnesse.testpage}.*Test*/*.xml"
+            excludesfile="${fitnesse.testresults.dir}/fitnesse-test-results.xml">
+      </xslt>
 	</target>
 
 </project>
