@@ -2,17 +2,23 @@
 <project name="Build Web Tier" basedir="." default="all" xmlns:ivy="antlib:org.apache.ivy.ant">
 
 	<property environment="env" />
-   <property name="component.distribution.dir" value="${distribution.base.dir}" />
+	<property name="component.distribution.dir" value="${distribution.base.dir}" />
 	<property name="component.distribution.path" value="${distribution.base.path}" />
 	<property name="component.packaged.file" value="${component.name}-${component.version}.${component.package.extension}" />
 	<property name="application.packaged.file" value="${application.name}-${component.version}.${application.package.extension}" />
 	<property name="application.deployed.file" value="${application.name}.${application.package.extension}" />
 	<property name="application.url" value="${appserver.url}/${application.name}" />
+
+	<path id="ivy.lib.path">
+	    <fileset dir="${ivy.root.dir}" includes="*.jar"/>
+	</path>
+	
+	<taskdef resource="org/apache/ivy/ant/antlib.xml" uri="antlib:org.apache.ivy.ant" classpathref="ivy.lib.path"/>
 	
 	<patternset id="source.files">
 		<include name="**/*.java" />
 	</patternset>
-	
+
 	<patternset id="source.resources">
 		<include name="**/*.xml" />
 		<include name="**/*.xsd" />
@@ -20,7 +26,7 @@
 		<include name="**/*.java.template" />
 		<exclude name="**/*.copyarea.db" />
 	</patternset>
-	
+
 	<path id="project.auxiliary.classpath">
 		<fileset dir="${project.library.dir}">
 			<include name="**/*.jar" />
@@ -33,21 +39,21 @@
 			<exclude name="**/*.copyarea.db" />
 		</fileset>
 	</path>
-	
+
 	<path id="processpuzzle.production.classpath">
 		<fileset dir="${common.dependent.library.path}/ProductionLibraries">
 			<include name="**/*.jar" />
 			<exclude name="**/*.copyarea.db" />
 		</fileset>
 	</path>
-	
+
 	<path id="processpuzzle.distribution.classpath">
 		<fileset dir="${common.dependent.library.path}/Distribution/ProcessPuzzle">
 			<include name="**/*.jar" />
 			<exclude name="**/*.copyarea.db" />
 		</fileset>
 	</path>
-	
+
 	<path id="cobertura.classpath">
 		<fileset dir="${cobertura.root.dir}">
 			<include name="cobertura-2.0.3.jar" />
@@ -67,7 +73,7 @@
 			<exclude name="**/*.copyarea.db" />
 		</fileset>
 	</path>
-	
+
 	<path id="findbugs.classpath">
 		<fileset dir="${findbugs.root.dir}">
 			<include name="lib/findbugs-ant.jar" />
@@ -81,72 +87,72 @@
 			<exclude name="**/*.copyarea.db" />
 		</fileset>
 	</path>
-	
-   <path id="catalina-ant-classpath">
-      <fileset dir="${appserver.dir}">
-         <include name="bin/tomcat-juli.jar" />
-         <include name="lib/catalina-ant.jar" />
-         <include name="lib/jasper.jar" />
-         <include name="lib/servlet-api.jar" />
-         <include name="lib/tomcat-coyote.jar" />
-         <include name="lib/tomcat-util.jar" />
-         <exclude name="**/*.copyarea.db" />
-      </fileset>
-   </path>
-   
-   <path id="yui.compressor.classpath">
-      <fileset dir="${yui.compressor.root.dir}">
-         <include name="build/yuicompressor-2.4.7.jar" />
-         <include name="lib/*.jar" />
-         <exclude name="**/*.copyarea.db" />
-      </fileset>
-   </path>
-   
+
+	<path id="catalina-ant-classpath">
+		<fileset dir="${appserver.dir}">
+			<include name="bin/tomcat-juli.jar" />
+			<include name="lib/catalina-ant.jar" />
+			<include name="lib/jasper.jar" />
+			<include name="lib/servlet-api.jar" />
+			<include name="lib/tomcat-coyote.jar" />
+			<include name="lib/tomcat-util.jar" />
+			<exclude name="**/*.copyarea.db" />
+		</fileset>
+	</path>
+
+	<path id="yui.compressor.classpath">
+		<fileset dir="${yui.compressor.root.dir}">
+			<include name="build/yuicompressor-2.4.7.jar" />
+			<include name="lib/*.jar" />
+			<exclude name="**/*.copyarea.db" />
+		</fileset>
+	</path>
+
 	<ivy:configure file="Build/ivysettings.xml" />
 	<ivy:cachepath pathid="processpuzzle.development.classpath" conf="development" />
-   <ivy:cachepath pathid="processpuzzle.production.classpath" conf="production" />
-	
+	<ivy:cachepath pathid="processpuzzle.production.classpath" conf="production" />
+
 	<path id="compile.production.classpath">
-		<path refid="processpuzzle.production.classpath"/>
-		<path refid="project.auxiliary.classpath"/>
+		<path refid="processpuzzle.production.classpath" />
+		<path refid="project.auxiliary.classpath" />
 	</path>
-	
+
 	<path id="compile.test.classpath">
-		<path refid="compile.production.classpath"/>
-		<path refid="processpuzzle.development.classpath"/>
+		<path refid="compile.production.classpath" />
+		<path refid="processpuzzle.development.classpath" />
 		<pathelement location="${project.production.classes.dir}" />
 	</path>
 
 	<taskdef classpathref="cobertura.classpath" resource="tasks.properties" />
 	<taskdef name="findbugs" classpathref="findbugs.classpath" classname="edu.umd.cs.findbugs.anttask.FindBugsTask" />
 	<taskdef name="pmd" classpathref="pmd.classpath" classname="net.sourceforge.pmd.ant.PMDTask" />
-   <taskdef resource="org/apache/catalina/ant/catalina.tasks" classpathref="catalina-ant-classpath" />
-	<taskdef name="catalina-start" classname="org.apache.catalina.ant.StartTask" classpathref="catalina-ant-classpath"/>
-   <taskdef name="catalina-stop" classname="org.apache.catalina.ant.StopTask" classpathref="catalina-ant-classpath"/>
+	<taskdef resource="org/apache/catalina/ant/catalina.tasks" classpathref="catalina-ant-classpath" />
+	<taskdef name="catalina-start" classname="org.apache.catalina.ant.StartTask" classpathref="catalina-ant-classpath" />
+	<taskdef name="catalina-stop" classname="org.apache.catalina.ant.StopTask" classpathref="catalina-ant-classpath" />
 
 
 	<!-- Web Tier Build -->
-	<import file="init.build.xml"/>
-	<import file="install.library.build.xml"/>
-   <import file="resolve.libraries.build.xml"/>
-	<import file="compile.build.xml"/>
-   <import file="component.packaging.build.xml"/>
-	<import file="component.test.build.xml"/>
-	<import file="application.packaging.build.xml"/>
-	<import file="start-stop-tomcat.xml"/>
-	<import file="undeploy.build.xml"/>
-	<import file="deploy.build.xml"/>
-	<import file="server.availability.build.xml"/>
-	<import file="javascript.test.build.xml"/>
-	<import file="javascript.archive.build.xml"/>
-	<import file="application.test.build.xml"/>
-	<import file="analyse.build.xml"/>
-	<import file="application.distribution.build.xml"/>
-		
+	<import file="init.build.xml" />
+	<import file="install.library.build.xml" />
+	<import file="resolve.libraries.build.xml" />
+	<import file="compile.build.xml" />
+	<import file="component.packaging.build.xml" />
+	<import file="component.test.build.xml" />
+	<import file="application.packaging.build.xml" />
+	<import file="start-stop-tomcat.xml" />
+	<import file="undeploy.build.xml" />
+	<import file="deploy.build.xml" />
+	<import file="server.availability.build.xml" />
+	<import file="javascript.test.build.xml" />
+	<import file="javascript.archive.build.xml" />
+	<import file="application.test.build.xml" />
+	<import file="analyse.build.xml" />
+	<import file="application.distribution.build.xml" />
+
 	<target name="all" depends="distribute" />
-		
+
 	<target name="init" depends="component.initializing.init" description="Initializes build environment." />
-   <target name="resolve" depends="init, component.resolve.resolve" description="Fetches dependent libraries." />
+	<target name="resolve" depends="init, component.resolve.resolve" description="Fetches dependent libraries." />
 	<target name="install" depends="resolve, install.library.install" description="Installs app's dependent libraries." />
 	<target name="compile" depends="install, component.compiling.compile" description="Compiles sources." />
 	<target name="java.archive" depends="compile, component.packaging.package" description="Package java component." />
@@ -160,7 +166,7 @@
 	<target name="test" depends="application.test, component.testing.test" description="Test component." />
 	<target name="analyse" depends="test, component.analysis.analyse" description="Analyse component." />
 	<target name="distribute" depends="analyse, application.distribution.distribute" description="Distribute packaged component." />
-	
+
 	<target name="nooperation">
 		<echo>web.tier.build</echo>
 	</target>

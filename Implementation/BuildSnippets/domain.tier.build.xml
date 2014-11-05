@@ -7,6 +7,12 @@
 	<property name="component.distribution.path" value="${distribution.base.path}" />
 	<property name="component.packaged.file" value="${component.name}-${component.version}.${component.package.extension}" />
 
+	<path id="ivy.lib.path">
+	    <fileset dir="${ivy.root.dir}" includes="*.jar"/>
+	</path>
+	
+	<taskdef resource="org/apache/ivy/ant/antlib.xml" uri="antlib:org.apache.ivy.ant" classpathref="ivy.lib.path"/>
+	
 	<patternset id="source.files">
 		<include name="**/*.java" />
 	</patternset>
