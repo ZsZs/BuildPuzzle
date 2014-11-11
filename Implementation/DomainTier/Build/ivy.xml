@@ -4,6 +4,7 @@
    <info organisation="${project.name}" module="${component.name}" revision="${component.version}" status="integration"/>
 	
    <dependencies>
+      <dependency org="com.processpuzzle" name="processpuzzle-litest-domain" rev="0.3.0" conf="production->*,!sources,!javadoc" />
       <dependency org="junit" name="junit" rev="4.11"/>
    </dependencies>
 </ivy-module>

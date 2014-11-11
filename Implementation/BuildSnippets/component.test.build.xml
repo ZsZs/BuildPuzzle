@@ -70,7 +70,7 @@
 	</target>
 	
 	<target name="unit-test">		
-		<junit printsummary="withOutAndErr" haltonfailure="${project.unittests.haltonfailure}" fork="yes" maxmemory="512m" failureProperty="unit.test.failed">
+		<junit printsummary="withOutAndErr" haltonfailure="${project.unittests.haltonfailure}" fork="true" maxmemory="512m" failureProperty="unit.test.failed">
 			<!-- Specify the name of the coverage data file to use. -->
 			<sysproperty key="net.sourceforge.cobertura.datafile"	value="${cobertura.data.file}" />
 
