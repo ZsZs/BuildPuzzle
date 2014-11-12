@@ -8,8 +8,9 @@
 	
 	<target name="fitnesse-test" description="Run fitnesse acceptance tests." depends="unit-test">
 		<echo>Fitnesse dir: ${fitnesse.root.dir}, Test results directory: ${fitnesse.testresults.dir}, Test page: ${fitnesse.testpage}</echo>
-		<delete dir="${fitnesse.testresults.dir}/${fitnesse.testpage}"/>
-		
+		<delete dir="${fitnesse.testresults.dir}" />
+		<mkdir dir="${fitnesse.testresults.dir}"/>
+			
 		<!--     
 		<java dir="${fitnesse.root.dir}" classname="fitlibrary.batch.FitLibraryRunner" fork="true" resultproperty="FitRegressionResult" >
 			<sysproperty key="net.sourceforge.cobertura.datafile"	value="${cobertura.data.file}" />
