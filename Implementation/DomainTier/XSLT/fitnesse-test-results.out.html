@@ -1,0 +1,679 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      <title>FitNesse Test Results for LiTest.DocumentsAndTests.DomainLogic</title>
+      <link rel="stylesheet" type="text/css" href="Fitnesse-TestPage.css">
+   </head>
+   <body>
+      <h1>FitNesse Tests Results.</h1>
+      <table width="100%">
+         <tbody>
+            <tr>
+               <td align="left"></td>
+               <td align="right">Designed for use with
+                  <a href="http://fitnesse.org/">FitNesse</a> and <a href="http://ant.apache.org/">Ant</a>.
+                  
+               </td>
+            </tr>
+         </tbody>
+      </table>
+      <hr size="1">
+      <h2>Summary</h2>
+      <table class="details" border="0" cellpadding="5" cellspacing="2" width="95%">
+         <tr valign="top">
+            <th>Tests</th>
+            <th>Ignored</th>
+            <th>Failures</th>
+            <th>Errors</th>
+            <th>Success rate</th>
+         </tr>
+         <tr class="Pass">
+            <td>2</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+            <td>100.00%</td>
+         </tr>
+      </table>
+      <h2>Tests</h2>
+      <table class="details" border="0" cellpadding="5" cellspacing="2" width="95%">
+         <tr valign="top">
+            <th width="70%">Name</th>
+            <th>Passed</th>
+            <th>Ignored</th>
+            <th>Failures</th>
+            <th>Errors</th>
+            <th>Success Rate</th>
+         </tr>
+         <tr class="Pass">
+            <td><a href="#LoggingConfigurator">LoggingConfigurator</a></td>
+            <td>9</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+            <td>100.00%</td>
+         </tr>
+         <tr class="Pass">
+            <td><a href="#TestCaseWithTransientFreshFixture">TestCaseWithTransientFreshFixture</a></td>
+            <td>31</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+            <td>100.00%</td>
+         </tr>
+      </table>
+      <h2>Test Details</h2>
+      <div class="fitnesse"><a name="LoggingConfigurator"></a><h3>LoggingConfigurator</h3><br/><table>
+         	<tr>
+         		<td>add named</td>
+         		<td>loggingConfigurator</td>
+         		<td>com.processpuzzle.litest.fitnesse.LoggingConfigurator</td></tr>
+         </table>
+         <br/><table>
+         	<tr>
+         		<td>Import</td>
+         	</tr>
+         	<tr>
+         		<td>com.processpuzzle.fitnesse.configuration</td>
+         	</tr>
+         </table>
+         <br/>Here you can configure <a href="http://logging.apache.org/log4j/1.2/index.html">Log4J</a>
+         loggers, appenders and layouts.<br/>Please note that it is advisable to <b>not</b>
+         configure none fitnesse related fixture loggers here, as other part's loggers of your
+         software are configure elsewere other way.<br/><br/><h3>Create loggers</h3>
+         Here you can create any number of loggers.<br/><table>
+         	<tr>
+         		<td><b>create logger</b></td>
+         		<td>com.processpuzzle.fitnesse</td>
+         	</tr>
+         	<tr>
+         		<td><b>create logger</b></td>
+         		<td>hu.itkodex.commons</td>
+         	</tr>
+         	<tr>
+         		<td><b>create logger</b></td>
+         		<td>hu.itkodex.litest</td>
+         	</tr>
+         </table>
+         <br/><h3>Create layout</h3>
+         <table>
+         	<tr>
+         		<td><b>create pattern layout</b></td>
+         		<td>simple layout</td>
+         		<td><b>with format</b></td>
+         		<td>%d{yyyy MMM dd HH:mm:ss} %p %t %c{3} - %m%n</td>
+         	</tr>
+         </table>
+         <br/><h3>Create appenders</h3>
+         Please note that you can select from appender implementations <a href="http://logging.apache.org/log4j/1.2/apidocs/org/apache/log4j/Appender.html">found
+         here.</a><br/><br/><table>
+         	<tr>
+         		<td><b>create appender</b></td>
+         		<td>console appender</td>
+         		<td><b>of type</b></td>
+         		<td>ConsoleAppender</td>
+         		<td><b>with layout</b></td>
+         		<td>simple layout</td>
+         	</tr>
+         </table>
+         <br/><h3>Put all together</h3>
+         <table>
+         	<tr>
+         		<td><b>add appender</b></td>
+         		<td>console appender</td>
+         		<td><b>to logger</b></td>
+         		<td>com.processpuzzle.fitnesse</td>
+         	</tr>
+         	<tr>
+         		<td><b>set logging level</b></td>
+         		<td>DEBUG</td>
+         		<td><b>for logger</b></td>
+         		<td>com.processpuzzle.fitnesse</td>
+         	</tr>
+         </table>
+         <br/><table>
+         	<tr>
+         		<td><b>add appender</b></td>
+         		<td>console appender</td>
+         		<td><b>to logger</b></td>
+         		<td>hu.itkodex.commons</td>
+         	</tr>
+         	<tr>
+         		<td><b>set logging level</b></td>
+         		<td>TRACE</td>
+         		<td><b>for logger</b></td>
+         		<td>hu.itkodex.commons</td>
+         	</tr>
+         </table>
+         <br/><table>
+         	<tr>
+         		<td><b>add appender</b></td>
+         		<td>console appender</td>
+         		<td><b>to logger</b></td>
+         		<td>hu.itkodex.litest</td>
+         	</tr>
+         	<tr>
+         		<td><b>set logging level</b></td>
+         		<td>TRACE</td>
+         		<td><b>for logger</b></td>
+         		<td>hu.itkodex.litest</td>
+         	</tr>
+         </table>
+         <br/><br/>Check to how it works:<br/><table>
+         	<tr>
+         		<td class="pass"><b>check logger</b></td>
+         		<td>com.processpuzzle.fitnesse</td>
+         		<td class="pass"><b>with message</b></td>
+         		<td>Hello world!</td>
+         		<td class="pass"><b>of level</b></td>
+         		<td>DEBUG</td>
+         	</tr>
+         	<tr>
+         		<td class="pass"><b>check logger</b></td>
+         		<td>hu.itkodex.commons</td>
+         		<td class="pass"><b>with message</b></td>
+         		<td>Hello world!</td>
+         		<td class="pass"><b>of level</b></td>
+         		<td>TRACE</td>
+         	</tr>
+         	<tr>
+         		<td class="pass"><b>check logger</b></td>
+         		<td>hu.itkodex.litest</td>
+         		<td class="pass"><b>with message</b></td>
+         		<td>Hello world!</td>
+         		<td class="pass"><b>of level</b></td>
+         		<td>TRACE</td>
+         	</tr>
+         </table>
+         <br/><a name="TestCaseWithTransientFreshFixture"></a><h3>TestCaseWithTransientFreshFixture</h3><div class="collapsible closed"><ul><li><a href='#' class='expandall'>Expand</a></li><li><a
+         href='#' class='collapseall'>Collapse</a></li></ul>
+         	<p class="title">Included page: <a href="LiTest.DocumentsAndTests.DomainLogic.TestCasePackage.TestCaseWithTransientFreshFixture.SetUp">.LiTest.DocumentsAndTests.DomainLogic.TestCasePackage.TestCaseWithTransientFreshFixture.SetUp</a>
+         <a href="LiTest.DocumentsAndTests.DomainLogic.TestCasePackage.TestCaseWithTransientFreshFixture.SetUp?edit&amp;redirectToReferer=true&amp;redirectAction="
+         class="edit">(edit)</a></p>
+         	<div><div class="collapsible closed"><ul><li><a href='#' class='expandall'>Expand</a></li><li><a
+         href='#' class='collapseall'>Collapse</a></li></ul>
+         	<p class="title">Included page: <a href="LiTest.DomainLogic.FitNesseHelpers.LoggingConfigurator">&lt;LiTest.DomainLogic.FitNesseHelpers.LoggingConfigurator</a>
+         <a href="LiTest.DomainLogic.FitNesseHelpers.LoggingConfigurator?edit&amp;redirectToReferer=true&amp;redirectAction="
+         class="edit">(edit)</a></p>
+         	<div><table>
+         	<tr>
+         		<td>add named</td>
+         		<td>loggingConfigurator</td>
+         		<td>com.processpuzzle.litest.fitnesse.LoggingConfigurator</td></tr>
+         </table>
+         <br/><table>
+         	<tr>
+         		<td>Import</td>
+         	</tr>
+         	<tr>
+         		<td>com.processpuzzle.fitnesse.configuration</td>
+         	</tr>
+         </table>
+         <br/>Here you can configure <a href="http://logging.apache.org/log4j/1.2/index.html">Log4J</a>
+         loggers, appenders and layouts.<br/>Please note that it is advisable to <b>not</b>
+         configure none fitnesse related fixture loggers here, as other part's loggers of your
+         software are configure elsewere other way.<br/><br/><h3>Create loggers</h3>
+         Here you can create any number of loggers.<br/><table>
+         	<tr>
+         		<td><b>create logger</b></td>
+         		<td>com.processpuzzle.fitnesse</td>
+         	</tr>
+         	<tr>
+         		<td><b>create logger</b></td>
+         		<td>com.processpuzzle.commons</td>
+         	</tr>
+         	<tr>
+         		<td><b>create logger</b></td>
+         		<td>com.processpuzzle.litest</td>
+         	</tr>
+         </table>
+         <br/><h3>Create layout</h3>
+         <table>
+         	<tr>
+         		<td><b>create pattern layout</b></td>
+         		<td>simple layout</td>
+         		<td><b>with format</b></td>
+         		<td>%d{yyyy MMM dd HH:mm:ss} %p %t %c{3} - %m%n</td>
+         	</tr>
+         </table>
+         <br/><h3>Create appenders</h3>
+         Please note that you can select from appender implementations <a href="http://logging.apache.org/log4j/1.2/apidocs/org/apache/log4j/Appender.html">found
+         here.</a><br/><br/><table>
+         	<tr>
+         		<td><b>create appender</b></td>
+         		<td>console appender</td>
+         		<td><b>of type</b></td>
+         		<td>ConsoleAppender</td>
+         		<td><b>with layout</b></td>
+         		<td>simple layout</td>
+         	</tr>
+         </table>
+         <br/><h3>Put all together</h3>
+         <table>
+         	<tr>
+         		<td><b>add appender</b></td>
+         		<td>console appender</td>
+         		<td><b>to logger</b></td>
+         		<td>com.processpuzzle.fitnesse</td>
+         	</tr>
+         	<tr>
+         		<td><b>set logging level</b></td>
+         		<td>DEBUG</td>
+         		<td><b>for logger</b></td>
+         		<td>com.processpuzzle.fitnesse</td>
+         	</tr>
+         </table>
+         <br/><table>
+         	<tr>
+         		<td><b>add appender</b></td>
+         		<td>console appender</td>
+         		<td><b>to logger</b></td>
+         		<td>hu.itkodex.commons</td>
+         	</tr>
+         	<tr>
+         		<td><b>set logging level</b></td>
+         		<td>TRACE</td>
+         		<td><b>for logger</b></td>
+         		<td>hu.itkodex.commons</td>
+         	</tr>
+         </table>
+         <br/><table>
+         	<tr>
+         		<td><b>add appender</b></td>
+         		<td>console appender</td>
+         		<td><b>to logger</b></td>
+         		<td>hu.itkodex.litest</td>
+         	</tr>
+         	<tr>
+         		<td><b>set logging level</b></td>
+         		<td>TRACE</td>
+         		<td><b>for logger</b></td>
+         		<td>hu.itkodex.litest</td>
+         	</tr>
+         </table>
+         <br/><br/>Check to how it works:<br/><table>
+         	<tr>
+         		<td class="pass"><b>check logger</b></td>
+         		<td>com.processpuzzle.fitnesse</td>
+         		<td class="pass"><b>with message</b></td>
+         		<td>Hello world!</td>
+         		<td class="pass"><b>of level</b></td>
+         		<td>DEBUG</td>
+         	</tr>
+         	<tr>
+         		<td class="pass"><b>check logger</b></td>
+         		<td>com.processpuzzle.commons</td>
+         		<td class="pass"><b>with message</b></td>
+         		<td>Hello world!</td>
+         		<td class="pass"><b>of level</b></td>
+         		<td>TRACE</td>
+         	</tr>
+         	<tr>
+         		<td class="pass"><b>check logger</b></td>
+         		<td>com.processpuzzle.litest</td>
+         		<td class="pass"><b>with message</b></td>
+         		<td>Hello world!</td>
+         		<td class="pass"><b>of level</b></td>
+         		<td>TRACE</td>
+         	</tr>
+         </table>
+         <br/></div>
+         </div>
+         <br/><table>
+         	<tr>
+         		<td>Import</td>
+         	</tr>
+         	<tr>
+         		<td>com.processpuzzle.commons.fitnesse.generics.domain</td>
+         	</tr>
+         	<tr>
+         		<td>com.processpuzzle.litest.fitnesse</td>
+         	</tr>
+         	<tr>
+         		<td>com.processpuzzle.litest.fitnesse.testcase.domain</td>
+         	</tr>
+         </table>
+         <br/><table>
+         	<tr>
+         		<td>add named</td>
+         		<td>litester</td>
+         		<td>com.processpuzzle.litest.fitnesse.testcase.domain.LiTestTester</td></tr>
+         	<tr>
+         		<td>select</td>
+         		<td colspan="3">litester</td>
+         	</tr>
+         </table>
+         </div>
+         </div>
+         <br/><i>TestCaseWithTransientFreshFixture</i> is a special kind of ObjectTest which
+         instantiates a <i>TransientFreshFixtue</i> before each tests and throws away (with
+         garbage collection) after each tests.<br/><br/><div class="collapsible closed"><ul><li><a
+         href='#' class='expandall'>Expand</a></li><li><a href='#' class='collapseall'>Collapse</a></li></ul>
+         	<p class="title">See the details of testing configuration...</p>
+         	<div><img src="http://test.itkodex.hu/files/ITCodex/LiTest/TestOfSuiteWithTransientFreshFixture-Overview.gif"/><br/></div>
+         </div>
+         <div class="collapsible closed"><ul><li><a href='#' class='expandall'>Expand</a></li><li><a
+         href='#' class='collapseall'>Collapse</a></li></ul>
+         	<p class="title">Source code definitions</p>
+         	<div><span class="meta">variable defined: TestCaseWithTransientFreshFixture={{{
+         package com.processpuzzle.litest.testsuite;
+         
+         import org.junit.Test;
+         import static org.junit.Assert.*;
+         import static org.hamcrest.Matchers.*;
+         import com.processpuzzle.litest.fixture.FitTestTransientFreshFixture;
+         import com.processpuzzle.litest.testcase.GenericTestSuite;
+         import com.processpuzzle.litest.testcase.TestSUT;
+         
+         public class FitTestSuiteWithTransientFreshFixture extends GenericTestSuite&lt;TestSUT,
+         FitTestTransientFreshFixture&gt; {
+         private static final String FIXTURE_CONTAINER_PATH = null;
+         
+         public FitTestSuiteWithTransientFreshFixture() {
+         super( FIXTURE_CONTAINER_PATH );
+         }
+         
+         @Test public void methodOneToExcercise_ShouldReturnHello() {
+         assertThat( sut.methodOneToExcercise(), equalTo( "Hello" ));
+         }
+         
+         @Test public void methodTwoToExcercise_ShouldReturnWorld() {
+         assertThat( sut.methodTwoToExcercise(), equalTo( "world!" ));
+         }
+         }
+         }}} </span>
+         <br/><br/><span class="meta">variable defined: TestTransientFreshFixture={{{
+         package com.processpuzzle.litest.fixture;
+         
+         import com.processpuzzle.litest.fixture.GenericTestFixture;
+         import com.processpuzzle.litest.fixture.TransientFreshFixture;
+         import com.processpuzzle.litest.testcase.TestSUT;
+         
+         public class FitTestTransientFreshFixture extends GenericTestFixture&lt;TestSUT&gt;
+         implements TransientFreshFixture&lt;TestSUT&gt;{
+         
+         @Override protected TestSUT instantiateSUT() {
+         return new TestSUT();
+         }
+         
+         @Override protected void configureAfterSutInstantiation() { }
+         
+         @Override protected void configureBeforeSutInstantiation() { }
+         
+         @Override protected void releaseResources() { }
+         }
+         }}}</span>
+         <br/><br/><hr/>
+         Persistent fresh fixture definition:<br/><span class="meta">variable defined: TestPersistentFreshFixture={{{
+         package com.processpuzzle.litest.fixture;
+         
+         import com.processpuzzle.litest.fixture.GenericTestFixture;
+         import com.processpuzzle.litest.testcase.TestSUT;
+         
+         public class FitTestPersistentFreshFixture extends GenericTestFixture&lt;TestSUT&gt;
+         implements PersistentFreshFixture&lt;TestSUT&gt;{
+         
+         @Override protected TestSUT instantiateSUT() {
+         return new TestSUT();
+         }
+         
+         @Override protected void configureAfterSutInstantiation() { }
+         
+         @Override protected void configureBeforeSutInstantiation() { }
+         
+         @Override protected void releaseResources() { }
+         }
+         }}}</span>
+         <br/><br/><hr size="2"/>
+         Test suite with persistent fresh fixture<br/><span class="meta">variable defined:
+         TestCaseWithPersistentFreshFixture={{{
+         package com.processpuzzle.litest.testcase;
+         
+         import com.processpuzzle.litest.fixture.FitTestPersistentFreshFixture;
+         
+         import org.junit.Test;
+         import static org.junit.Assert.*;
+         import static org.hamcrest.Matchers.*;
+         
+         public class FitTestSuiteWithPersistentFreshFixture extends GenericTestSuite&lt;TestSUT,
+         FitTestPersistentFreshFixture&gt; {
+         private static final String FIXTURE_CONTAINER_PATH = null;
+         
+         public FitTestSuiteWithPersistentFreshFixture() {
+         super( FIXTURE_CONTAINER_PATH );
+         }
+         }
+         }}} </span>
+         <br/><br/></div>
+         </div>
+         <h4>Test suite with transient fresh fixture</h4>
+         First we define a transient fresh fixture (subclass of GenericTestFixture which implements
+         TransientFreshFixture interface.<br/><table>
+         	<tr>
+         		<td><b>define test fixture</b></td>
+         		<td><pre>
+         package com.processpuzzle.litest.fixture;
+         
+         import com.processpuzzle.litest.fixture.GenericTestFixture;
+         import com.processpuzzle.litest.fixture.TransientFreshFixture;
+         import com.processpuzzle.litest.testcase.TestSUT;
+         
+         public class FitTestTransientFreshFixture extends GenericTestFixture&lt;TestSUT&gt;
+         implements TransientFreshFixture&lt;TestSUT&gt;{
+         
+         @Override protected TestSUT instantiateSUT() {
+         return new TestSUT();
+         }
+         
+         @Override protected void configureAfterSutInstantiation() { }
+         
+         @Override protected void configureBeforeSutInstantiation() { }
+         
+         @Override protected void releaseResources() { }
+         }
+         </pre></td>
+         	</tr>
+         </table>
+         <br/>The second step is to define and instantiate a test suite which uses the previously
+         defined transient fresh fixture. Test suites should specialize GenericTestSuite which
+         implements the fixture strategy follows from the specified fixture type.<br/><table>
+         	<tr>
+         		<td><b>define test suite</b></td>
+         		<td><pre>
+         package com.processpuzzle.litest.testsuite;
+         
+         import org.junit.Test;
+         import static org.junit.Assert.*;
+         import static org.hamcrest.Matchers.*;
+         import com.processpuzzle.litest.fixture.FitTestTransientFreshFixture;
+         import com.processpuzzle.litest.testcase.GenericTestSuite;
+         import com.processpuzzle.litest.testcase.TestSUT;
+         
+         public class FitTestSuiteWithTransientFreshFixture extends GenericTestSuite&lt;TestSUT,
+         FitTestTransientFreshFixture&gt; {
+         private static final String FIXTURE_CONTAINER_PATH = null;
+         
+         public FitTestSuiteWithTransientFreshFixture() {
+         super( FIXTURE_CONTAINER_PATH );
+         }
+         
+         @Test public void methodOneToExcercise_ShouldReturnHello() {
+         assertThat( sut.methodOneToExcercise(), equalTo( "Hello" ));
+         }
+         
+         @Test public void methodTwoToExcercise_ShouldReturnWorld() {
+         assertThat( sut.methodTwoToExcercise(), equalTo( "world!" ));
+         }
+         }
+         </pre></td>
+         	</tr>
+         	<tr>
+         		<td><b>instantiate test suite</b></td>
+         		<td>freshTestSuite</td>
+         	</tr>
+         </table>
+         <br/>When the test suite is instantiated nor the fixture, nor the sut object is instantiated.<br/><table>
+         	<tr>
+         		<td class="pass"><b>assertThat</b></td>
+         		<td>freshTestSuite.getFixture()</td>
+         		<td class="pass"><b>is</b></td>
+         		<td>nullValue()</td>
+         	</tr>
+         	<tr>
+         		<td class="pass"><b>assertThat</b></td>
+         		<td>freshTestSuite.getSUT()</td>
+         		<td class="pass"><b>is</b></td>
+         		<td>nullValue()</td>
+         	</tr>
+         </table>
+         <br/>In case of Transient Fresh Fixture strategy even the beforeAllTests() doesn't
+         instantiates anything.<br/><table>
+         	<tr>
+         		<td colspan="4"><b>run before all tests</b></td>
+         	</tr>
+         	<tr>
+         		<td class="pass"><b>assertThat</b></td>
+         		<td>freshTestSuite.getFixture()</td>
+         		<td class="pass"><b>is</b></td>
+         		<td>nullValue()</td>
+         	</tr>
+         	<tr>
+         		<td class="pass"><b>assertThat</b></td>
+         		<td>freshTestSuite.getSUT()</td>
+         		<td class="pass"><b>is</b></td>
+         		<td>nullValue()</td>
+         	</tr>
+         </table>
+         <br/>When beforeEachTest() is invoked by the test runner fixture is instantiated and
+         it's setUp() method is invoked. The fixture's resposibility is to instantiate the
+         sut and it's depends on components.<br/><table>
+         	<tr>
+         		<td colspan="4"><b>run before each test</b></td>
+         	</tr>
+         	<tr>
+         		<td class="pass"><b>assertThat</b></td>
+         		<td>freshTestSuite.getFixture()</td>
+         		<td class="pass"><b>is</b></td>
+         		<td>notNullValue()</td>
+         	</tr>
+         	<tr>
+         		<td class="pass"><b>assertThat</b></td>
+         		<td>freshTestSuite.getFixture()</td>
+         		<td class="pass"><b>is</b></td>
+         		<td>instanceOf( GenericTestFixture.class )</td>
+         	</tr>
+         	<tr>
+         		<td class="pass"><b>assertThat</b></td>
+         		<td>freshTestSuite.getFixture().isConfigured()</td>
+         		<td class="pass"><b>is</b></td>
+         		<td>is(true)</td>
+         	</tr>
+         	<tr>
+         		<td class="pass"><b>assertThat</b></td>
+         		<td>freshTestSuite.getSUT()</td>
+         		<td class="pass"><b>is</b></td>
+         		<td>notNullValue()</td>
+         	</tr>
+         </table>
+         <br/>As the fixture is configured, test runner executes a test case.<br/><table>
+         	<tr>
+         		<td class="pass"><b>run test case</b></td>
+         		<td>methodOneToExcercise_ShouldReturnHello</td>
+         	</tr>
+         </table>
+         <br/>Executing a test case the test runner invokes afterEachTest() which destroys
+         fixture and therefore SUT and DOCs.<br/><table>
+         	<tr>
+         		<td colspan="4"><b>run after each test</b></td>
+         	</tr>
+         	<tr>
+         		<td class="pass"><b>assertThat</b></td>
+         		<td>freshTestSuite.getFixture()</td>
+         		<td class="pass"><b>is</b></td>
+         		<td>nullValue()</td>
+         	</tr>
+         	<tr>
+         		<td class="pass"><b>assertThat</b></td>
+         		<td>freshTestSuite.getSUT()</td>
+         		<td class="pass"><b>is</b></td>
+         		<td>nullValue()</td>
+         	</tr>
+         </table>
+         <br/>And the same sequence of events is followed untill all test cases was executed.<br/><table>
+         	<tr>
+         		<td colspan="2"><b>run before each test</b></td>
+         	</tr>
+         	<tr>
+         		<td class="pass"><b>run test case</b></td>
+         		<td>methodTwoToExcercise_ShouldReturnWorld</td>
+         	</tr>
+         	<tr>
+         		<td colspan="2"><b>run after each test</b></td>
+         	</tr>
+         </table>
+         <br/><h4>Test suite with persistent fresh fixture</h4>
+         First we define a persistent fresh fixture (subclass of GenericTestFixture which implements
+         PersistentFreshFixture interface.<br/><table>
+         	<tr>
+         		<td><b>define test fixture</b></td>
+         		<td><pre>
+         package com.processpuzzle.litest.fixture;
+         
+         import com.processpuzzle.litest.fixture.GenericTestFixture;
+         import com.processpuzzle.litest.testcase.TestSUT;
+         
+         public class FitTestPersistentFreshFixture extends GenericTestFixture&lt;TestSUT&gt;
+         implements PersistentFreshFixture&lt;TestSUT&gt;{
+         
+         @Override protected TestSUT instantiateSUT() {
+         return new TestSUT();
+         }
+         
+         @Override protected void configureAfterSutInstantiation() { }
+         
+         @Override protected void configureBeforeSutInstantiation() { }
+         
+         @Override protected void releaseResources() { }
+         }
+         </pre></td>
+         	</tr>
+         </table>
+         <br/>The second step is to define and instantiate a test suite which uses the previously
+         defined persistent fresh fixture. Test suites should specialize GenericTestSuite which
+         implements the fixture strategy follows from the specified fixture type. <i>Please
+         note that we test here only the differencies in fixture instantiation and set up and
+         do not duplicate the test case execution.</i><br/><table>
+         	<tr>
+         		<td><b>define test suite</b></td>
+         		<td><pre>
+         package com.processpuzzle.litest.testcase;
+         
+         import com.processpuzzle.litest.fixture.FitTestPersistentFreshFixture;
+         
+         import org.junit.Test;
+         import static org.junit.Assert.*;
+         import static org.hamcrest.Matchers.*;
+         
+         public class FitTestSuiteWithPersistentFreshFixture extends GenericTestSuite&lt;TestSUT,
+         FitTestPersistentFreshFixture&gt; {
+         private static final String FIXTURE_CONTAINER_PATH = null;
+         
+         public FitTestSuiteWithPersistentFreshFixture() {
+         super( FIXTURE_CONTAINER_PATH );
+         }
+         }
+         </pre></td>
+         	</tr>
+         	<tr>
+         		<td><b>instantiate test suite</b></td>
+         		<td>persistentTestSuite</td>
+         	</tr>
+         </table>
+         <br/><h4>Test suite with persistent shared fixture</h4>
+         <br/><h4>Test suite with composite fixture</h4>
+         
+      </div>
+   </body>
+</html>
