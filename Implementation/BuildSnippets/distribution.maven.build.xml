@@ -16,7 +16,7 @@
 		<artifact:localRepository id="local.repository" path="${maven.repository.local}" />
 		<artifact:pom file="pom.xml" id="component.pom" />
 
-		<artifact:install file="${distributed.java.archive.file}">
+		<artifact:install file="${distributed.component.file}">
 			<localRepository refid="local.repository" />
 			<pom refid="component.pom" />
 		</artifact:install>
