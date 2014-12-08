@@ -6,6 +6,8 @@
 	<property name="component.distribution.dir" value="${distribution.base.dir}" />
 	<property name="component.distribution.path" value="${distribution.base.path}" />
 	<property name="component.packaged.file" value="${component.name}-${component.version}.${component.package.extension}" />
+   <property name="component.packaged.source.file" value="${component.name}-${component.version}-sources.${component.package.extension}" />
+   <property name="component.packaged.javadoc.file" value="${component.name}-${component.version}-javadoc.${component.package.extension}" />
 
 	<path id="ivy.lib.path">
 	    <fileset dir="${ivy.root.dir}" includes="*.jar"/>
@@ -116,6 +118,7 @@
 	<import file="component.sign.build.xml" />
 	<import file="component.test.build.xml" />
 	<import file="analyse.build.xml" />
+   <import file="component.document.build.xml" />
 	<import file="component.distribution.build.xml" />
 
 	<target name="all" depends="distribute" />
@@ -125,12 +128,13 @@
 	<target name="compile" depends="resolve, component.compiling.compile" description="Compiles sources." />
 	<target name="java.archive" depends="compile, component.packaging.package" description="Package component." />
 	<target name="test" depends="java.archive, component.testing.test" description="Test component." />
-	<!--
 	<target name="java.sign" depends="test, component.sign.sign" description="Sign component." />
--->
-	<target name="analyse" depends="test, component.analysis.analyse" description="Analyse component." />
-	<target name="distribute" depends="analyse, component.distribution.distribute" description="Distribute packaged component." />
+	<target name="analyse" depends="java.sign, component.analysis.analyse" description="Analyse component." />
+   <target name="document" depends="analyse, component.document.document" description="Document the component." />
+	<target name="distribute" depends="document, component.distribution.distribute" description="Distribute packaged component." />
 
+   <target name="distribute-only" description="Bypasses the compillation, test targets and distribute packaged component." />
+	
 	<target name="nooperation">
 		<echo>domain.tier.build</echo>
 	</target>

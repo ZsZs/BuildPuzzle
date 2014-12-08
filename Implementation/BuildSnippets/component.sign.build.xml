@@ -6,6 +6,6 @@
 		<echo>About to sign ${component.packaged.file} component.</echo>
 		
 		<signjar jar="${project.distribution.dir}/${component.packaged.file}" alias="processpuzzle" storepass="36Zsuffa" keystore="${gpg.keystore}"/>
-		<!-- keytool -genkeypair -dname "cn=Zsolt Zsuffa, o=IT Codex, c=HU" -alias processpuzzle -keypass 36Zsuffa -storepass 36Zsuffa -validity 360 -->
+		<!-- keytool -genkeypair -dname "cn=Zsolt Zsuffa, o=Agile Renovation, c=HU" -alias processpuzzle -keypass 36Zsuffa -storepass 36Zsuffa -validity 360 -->
 	</target>
 </project>

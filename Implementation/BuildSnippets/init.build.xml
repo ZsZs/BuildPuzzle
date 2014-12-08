@@ -26,6 +26,7 @@
 		<mkdir dir="${cobertura.instrumented.dir}" />
 		<mkdir dir="${cobertura.coverage.xml.dir}" />
 		<mkdir dir="${cobertura.coverage.html.dir}" />
+      <mkdir dir="${javadoc.reports.dir}" />
 		<mkdir dir="${junit.reports.xml.dir}" />
 		<mkdir dir="${junit.reports.html.dir}" />
 		<mkdir dir="${jsunit.reports.dir}/html"/>

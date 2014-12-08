@@ -3,7 +3,9 @@
 <project name="component.distribution" basedir="." default="distribute" xmlns:ac="antlib:net.sf.antcontrib">
 	<description>Distributes the compiled, tested and packaged component.</description>
 
-	<property name="distributed.java.archive.file" value="${component.distribution.path}/${component.packaged.file}" />
+	<property name="distributed.component.file" value="${component.distribution.path}/${component.packaged.file}" />
+   <property name="distributed.component.javadoc.file" value="${component.distribution.path}/${component.packaged.javadoc.file}" />
+   <property name="distributed.component.source.file" value="${component.distribution.path}/${component.packaged.source.file}" />
 	<property name="distributed.component.properties.file" value="${component.distribution.path}/${component.distributed.properties.file}" />
    <property name="distributed.component.maven.file" value="${component.distribution.path}/${component.distributed.maven.file}" />
 	
@@ -13,7 +15,7 @@
    <import file="distribution.ivy.build.xml"/>
    <import file="distribution.maven.build.xml"/>
 	
-	<target name="distribute" depends="distribute.jar, distribute.component.properties, distribute.component.pom, ivy-distribute, maven-distribute" description="Distribute packaged Java component"/>
+	<target name="distribute" depends="distribute.jar, distribute.component.properties, distribute.component.pom, distribute.component.source, distribute.component.javadoc, ivy-distribute, maven-distribute" description="Distribute packaged Java component"/>
 	
 	<target name="distribute.jar">
 		 <echo>About to distribute ${component.packaged.file} component to ${component.distribution.path}.</echo>
@@ -29,6 +31,16 @@
    <target name="distribute.component.pom">
        <echo>About to distribute ${component.maven.file} component properties to ${component.distribution.path}.</echo>
        <distribute.artifact source.file="${project.root}/${component.maven.file}" destination.file="${distributed.component.maven.file}"/>
+   </target>
+
+   <target name="distribute.component.source">
+       <echo>About to distribute ${component.maven.file} component sources to ${component.distribution.path}.</echo>
+       <distribute.artifact source.file="${project.distribution.dir}/${component.packaged.source.file}" destination.file="${distributed.component.source.file}"/>
+   </target>
+
+   <target name="distribute.component.javadoc">
+       <echo>About to distribute ${component.maven.file} component sources to ${component.distribution.path}.</echo>
+       <distribute.artifact source.file="${project.distribution.dir}/${component.packaged.javadoc.file}" destination.file="${distributed.component.javadoc.file}"/>
    </target>
 </project>
 

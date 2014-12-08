@@ -12,18 +12,24 @@
 	    <buildnumber file="${project.build.dir}/build.num"/> <!-- let ANT auto increment a build number -->
 		
 		<jar destfile="${project.distribution.dir}/${component.packaged.file}" duplicate="fail" >
-			
 			<fileset dir="${project.production.classes.dir}" />
-			<fileset dir="${project.production.sources.dir}" />
+<!--			<fileset dir="${project.test.classes.dir}" />  -->
 			
-			<fileset dir="${project.test.classes.dir}" />
-			<fileset dir="${project.test.sources.dir}" />
-			
-	        <manifest>
-	            <attribute name="Built-By" value="IT Codex Llc."/>
-	            <attribute name="Implementation-Version"  value="${component.version}-build${build.number}"/>
-	            <attribute name="Built-Date" value="${TODAY}"/>
-	        </manifest>		
+	      <manifest>
+	         <attribute name="Built-By" value="Agile Renovation"/>
+	         <attribute name="Implementation-Version"  value="${component.version}-build${build.number}"/>
+	         <attribute name="Built-Date" value="${TODAY}"/>
+	      </manifest>		
 		</jar>
+
+      <jar destfile="${project.distribution.dir}/${component.packaged.source.file}" duplicate="fail" >
+         <fileset dir="${project.production.sources.dir}" />
+         <manifest>
+            <attribute name="Built-By" value="Agile Renovation"/>
+            <attribute name="Implementation-Version"  value="${component.version}-build${build.number}"/>
+            <attribute name="Built-Date" value="${TODAY}"/>
+         </manifest>    
+      </jar>
+		
 	</target>
 </project>
