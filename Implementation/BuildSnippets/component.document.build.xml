@@ -2,25 +2,27 @@
 <project name="component.document" basedir="." default="document">
 	<description>Sign packaged jar component.</description>
 
-	<target name="document">
-		<echo>About to generate javadoc for ${component.packaged.file} component.</echo>
+   <target name="document">
+      <echo>About to generate javadoc for ${component.packaged.file} component.</echo>
 
-		<javadoc destdir="${javadoc.reports.dir}" author="true" version="true" use="true" windowtitle="${component.name} - API">
+      <javadoc destdir="${javadoc.reports.dir}" author="true" version="true" use="true" windowtitle="${component.name} - API">
 
-			<fileset dir="${project.production.sources.dir}" defaultexcludes="yes">
-				<include name="com/processpuzzle/**" />
-			</fileset>
+         <fileset dir="${project.production.sources.dir}" defaultexcludes="yes">
+            <include name="com/processpuzzle/**"/>
+         </fileset>
+      	<classpath refid="compile.production.classpath" />
+      	<classpath refid="project.auxiliary.classpath" />
 
-			<doctitle><![CDATA[<h1>Test</h1>]]></doctitle>
-		   <bottom><![CDATA[<i>Copyright &#169; 2015 Agile Renovation. All Rights Reserved.</i>]]></bottom>
-   	   <tag name="todo" scope="all" description="To do:" />
-		   <link offline="true" href="http://docs.processpuzzle.com/api/" packagelistLoc="C:\tmp" />
-			<link href="http://docs.processpuzzle.com/api/" />
-		</javadoc>
-		
-      <jar destfile="${project.distribution.dir}/${component.packaged.javadoc.file}" duplicate="fail" >
-         <fileset dir="${javadoc.reports.dir}" />
+         <doctitle><![CDATA[<h1>Test</h1>]]></doctitle>
+         <bottom><![CDATA[<i>Copyright &#169; 2015 Agile Renovation. All Rights Reserved.</i>]]></bottom>
+         <tag name="todo" scope="all" description="To do:"/>
+         <link offline="true" href="http://docs.processpuzzle.com/api/" packagelistLoc="C:\tmp"/>
+         <link href="http://docs.processpuzzle.com/api/"/>
+      </javadoc>
+
+      <jar destfile="${project.distribution.dir}/${component.packaged.javadoc.file}" duplicate="fail">
+         <fileset dir="${javadoc.reports.dir}"/>
       </jar>
-		
-	</target>
+
+   </target>
 </project>
