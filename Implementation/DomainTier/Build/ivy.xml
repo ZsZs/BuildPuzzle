@@ -1,10 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ivy-module version="2.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://ant.apache.org/ivy/schemas/ivy.xsd">
 
-   <info organisation="${project.name}" module="${component.name}" revision="${component.version}" status="integration"/>
-	
+   <info organisation="${project.name}" module="${component.name}" revision="${component.version}" status="integration" />
+
+   <configurations>
+      <conf name="development" description="Libraries needed for testing." />
+      <conf name="production" description="Libraries needed in production environment." />
+   </configurations>
+
    <dependencies>
-      <dependency org="com.processpuzzle" name="processpuzzle-litest-domain" rev="0.3.0" conf="production->*,!sources,!javadoc" />
-      <dependency org="junit" name="junit" rev="4.11"/>
+      <dependency org="com.processpuzzle" name="processpuzzle-commons-domain" rev="0.1.1-RELEASE" conf="production->*,!sources,!javadoc" />
+      <dependency org="com.processpuzzle" name="processpuzzle-litest-domain" rev="0.3.2-RELEASE" conf="production->*,!sources,!javadoc" />
+      <dependency org="org.apache.ant" name="ant" rev="1.9.4" conf="production->*,!sources,!javadoc" />
    </dependencies>
 </ivy-module>
+
