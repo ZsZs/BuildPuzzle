@@ -1,16 +1,41 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project name="start-stop.tomcat" basedir="." default="tomcat-start">
-	<description>Starts or stops Apache Tomcat.</description>
-	
-	<target name="tomcat-start">
-		<exec executable="net">
-			<arg line="start Tomcat6" />
-		</exec>
-	</target>
-	
-	<target name="tomcat-stop">
-		<exec executable="net">
-			<arg line="stop Tomcat6" />
-		</exec>
-	</target>
+<project name="start-stop.server" basedir="." default="tomcat-start">
+   <description>Starts or stops Apache Tomcat.</description>
+
+   <target name="tomcat-stop" if="tomcat.running" depends="check-port">
+      <echo message="Tomcat is running...stopping it"/>
+      <java classname="org.apache.catalina.startup.Bootstrap" fork="true">
+         <classpath refid="catalina-ant-classpath" />
+         <jvmarg value="-Dcatalina.home=${appserver.dir}"/>
+         <arg line="stop"/>
+      </java>
+   </target>
+
+   <!-- Check whether Tomcat is running -->
+   <target name="check-port" description="Check whether Tomcat is running">
+      <echo message="Checking whether Tomcat is running"/>
+      <condition property="tomcat.running">
+         <socket server="localhost" port="${appserver.port}"/>
+      </condition>
+   </target>
+
+   <!-- start tomcat, it depends on deploy-local -->
+   <target name="tomcat-start" unless="tomcat.running" depends="check-port, tomcat-stop">
+      <property name="myclasspath" refid="catalina-ant-classpath"/>
+      <echo message="Classpath = ${myclasspath}"/>
+      
+      <java classname="org.apache.catalina.startup.Bootstrap" fork="true" spawn="true">
+         <classpath>
+            <path refid="catalina-ant-classpath" />
+         </classpath>
+         <jvmarg value="-Dcatalina.home=${appserver.dir}"/>
+         <arg line="start"/>
+      </java>
+      
+      <waitfor maxwait="30" maxwaitunit="second">
+         <and>
+            <socket server="localhost" port="${appserver.port}"/>
+         </and>
+      </waitfor>
+   </target>
 </project>

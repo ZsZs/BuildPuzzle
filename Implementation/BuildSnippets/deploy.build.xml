@@ -12,7 +12,8 @@
 	</target>
 
 	<target name="tomcat-deploy" depends="deploy-properties">
-	  <deploy url="${appserver.url}/manager/text" username="${appserver.username}" password="${appserver.password}" path="/${application.name}" war="file:///${source.file}"/>                   
+	   <echo>Attemting to deploy: ${source.file} onto: ${appserver.url}</echo>
+	   <deploy url="${appserver.url}/manager/text" username="${appserver.username}" password="${appserver.password}" path="/${application.name}" war="file:///${source.file}"/>                   
 	</target>
 	
 	<target name="wait-for-deploy" depends="tomcat-deploy">

@@ -34,7 +34,7 @@
 			<lib dir="${project.production.library.dir}" />
 			
 	        <manifest>
-	            <attribute name="Built-By" value="IT Codex Llc."/>
+	            <attribute name="Built-By" value="Agile Renovation"/>
 	            <attribute name="Implementation-Version"  value="${component.version}-build${build.number}"/>
 	            <attribute name="Built-Date" value="${TODAY}"/>
 	        </manifest>		

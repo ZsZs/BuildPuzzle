@@ -5,7 +5,9 @@
 	<property name="component.distribution.dir" value="${distribution.base.dir}" />
 	<property name="component.distribution.path" value="${distribution.base.path}" />
 	<property name="component.packaged.file" value="${component.name}-${component.version}.${component.package.extension}" />
-	<property name="application.packaged.file" value="${application.name}-${component.version}.${application.package.extension}" />
+   <property name="component.packaged.source.file" value="${component.name}-${component.version}-sources.${component.package.extension}" />
+   <property name="component.packaged.javadoc.file" value="${component.name}-${component.version}-javadoc.${component.package.extension}" />
+   <property name="application.packaged.file" value="${application.name}-${component.version}.${application.package.extension}" />
 	<property name="application.deployed.file" value="${application.name}.${application.package.extension}" />
 	<property name="application.url" value="${appserver.url}/${application.name}" />
 
@@ -90,12 +92,22 @@
 
 	<path id="catalina-ant-classpath">
 		<fileset dir="${appserver.dir}">
-			<include name="bin/tomcat-juli.jar" />
-			<include name="lib/catalina-ant.jar" />
-			<include name="lib/jasper.jar" />
-			<include name="lib/servlet-api.jar" />
+		   <include name="bin/bootstrap.jar" />
+		   <include name="bin/tomcat-juli.jar" />
+		   <include name="lib/*.jar" />
+		   <!--
+		   <include name="lib/annotations-api.jar" />
+		   <include name="lib/catalina.jar" />
+		   <include name="lib/catalina-ant.jar" />
+		   <include name="lib/el-api.jar" />
+		   <include name="lib/jasper.jar" />
+		   <include name="lib/jasper-el.jar" />
+		   <include name="lib/jsp-api.jar" />
+		   <include name="lib/servlet-api.jar" />
 			<include name="lib/tomcat-coyote.jar" />
-			<include name="lib/tomcat-util.jar" />
+		   <include name="lib/tomcat-api.jar" />
+		   <include name="lib/tomcat-util.jar" />
+		   -->
 			<exclude name="**/*.copyarea.db" />
 		</fileset>
 	</path>
@@ -157,16 +169,18 @@
 	<target name="compile" depends="install, component.compiling.compile" description="Compiles sources." />
 	<target name="java.archive" depends="compile, component.packaging.package" description="Package java component." />
 	<target name="application.packaging" depends="java.archive, application.packaging.package" description="Package web application." />
-	<target name="undeploy" depends="application.packaging, application.undeploy.undeploy" description="Undeploy previous version." />
+   <target name="start-server" depends="application.packaging, start-stop.server.tomcat-start" description="Start server." />
+   <target name="undeploy" depends="start-server, application.undeploy.undeploy" description="Undeploy previous version." />
 	<target name="deploy" depends="undeploy, application.deploy.deploy" description="Deploy web application." />
-	<target name="server.availability" depends="deploy, server.availability.check" description="Checks if application is available on server." />
+   <target name="server.availability" depends="deploy, server.availability.check" description="Checks if application is available on server." />
 	<target name="javascript.test" depends="server.availability, javascript.testing.test" description="Test JavaScrips." />
 	<target name="javascript.archive" depends="javascript.test, javascript.archive.archive" description="Concatenates and compressies JavaScrips." />
 	<target name="application.test" depends="javascript.archive, application.testing.test" description="Test the complete, deployed application." />
 	<target name="test" depends="application.test, component.testing.test" description="Test component." />
 	<target name="analyse" depends="test, component.analysis.analyse" description="Analyse component." />
 	<target name="distribute" depends="analyse, application.distribution.distribute" description="Distribute packaged component." />
-
+   <target name="stop-server" depends="distribute, start-stop.server.tomcat-stop" description="Stop server." />
+   
 	<target name="nooperation">
 		<echo>web.tier.build</echo>
 	</target>
